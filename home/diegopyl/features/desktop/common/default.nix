@@ -8,11 +8,13 @@
     ./pavucontrol.nix
     ./playerctl.nix
     ./zen-browser.nix
+    ./runelite.nix
     ./mimeapps.nix
   ];
 
   home.packages = [
     pkgs.android-studio
+    pkgs.jetbrains.idea-ultimate
     pkgs.github-desktop
     pkgs.libnotify
     pkgs.handlr-regex
