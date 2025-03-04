@@ -2,8 +2,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
@@ -33,6 +32,8 @@
   networking = {
     hostName = "desktop";
   };
+  services.flatpak.enable = true;
+  programs.java.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;

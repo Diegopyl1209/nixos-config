@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   i18n = {
     defaultLocale = lib.mkDefault "es_MX.UTF-8";
     extraLocaleSettings = {
