@@ -11,5 +11,9 @@ in {
     dockerSocket.enable = !dockerEnabled;
     defaultNetwork.settings.dns_enabled = true;
   };
-  environment.systemPackages = [pkgs.podman-compose];
+  environment.systemPackages = [
+    pkgs.podman-compose
+    pkgs.arion
+    pkgs.docker-client # needed for arion
+  ];
 }
