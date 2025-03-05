@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   ...
 }: let
   backup_dir = "${config.server.dataDir}/Vaultwarden/backup";

@@ -22,7 +22,6 @@
     ../common/optional/services/autobrr.nix
     ../common/optional/services/shoko.nix
     ../common/optional/services/qbittorrent.nix
-    ../common/optional/services/overleaf.nix
   ];
 
   server = {
