@@ -14,7 +14,7 @@ in {
     enable = true;
     backupDir = backup_dir;
     config = {
-      ROCKET_ADDRESS = "https://vaultwarden.diegopyl.duckdns.org";
+      ROCKET_ADDRESS = "0.0.0.0";
       ROCKET_PORT = 8222;
     };
   };
