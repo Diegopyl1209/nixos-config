@@ -37,6 +37,7 @@
   };
 
   programs.ssh.startAgent = true;
+  services.qemuGuest.enable = true;
 
   fileSystems."/run/media/hdd1" = {
     device = "/dev/disk/by-uuid/1d8863bd-af61-4214-993d-bec7b5f0c0bf";

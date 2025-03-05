@@ -14,10 +14,6 @@
       LC_TELEPHONE = "es_CL.UTF-8";
       LC_TIME = lib.mkDefault "es_CL.UTF-8";
     };
-    supportedLocales = lib.mkDefault [
-      "en_US.UTF-8/UTF-8"
-      "es_MX.UTF-8/UTF-8"
-    ];
   };
   location.provider = "geoclue2";
   time.timeZone = lib.mkDefault "America/Santiago";
