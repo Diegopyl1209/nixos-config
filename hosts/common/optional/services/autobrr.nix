@@ -9,9 +9,9 @@
   package = pkgs.autobrr;
   username = "diegopyl";
 in {
-  networking.firewall = {
+  /*networking.firewall = {
     allowedTCPPorts = [7474];
-  };
+  };*/
 
   systemd.tmpfiles.rules = [
     "d '${data_folder}' 0700 ${username} users - -"
@@ -32,4 +32,8 @@ in {
       Restart = "on-failure";
     };
   };
+
+  services.caddy.virtualHosts."http://autobrr.server.hs".extraConfig = ''
+    reverse_proxy :7474
+  '';
 }

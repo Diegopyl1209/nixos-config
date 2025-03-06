@@ -30,4 +30,8 @@
     jellyfin-web
     jellyfin-ffmpeg
   ];
+
+  services.caddy.virtualHosts."http://jellyfin.server.hs".extraConfig = ''
+    reverse_proxy :8096
+  '';
 }

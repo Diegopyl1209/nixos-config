@@ -1,7 +1,5 @@
 {
-  lib,
   config,
-  pkgs,
   ...
 }: let
   data_folder = "${config.server.dataDir}/Shoko";
@@ -23,4 +21,8 @@ in {
       # "--network=host"
     ];
   };
+
+  services.caddy.virtualHosts."http://shoko.server.hs".extraConfig = ''
+    reverse_proxy :8111
+  '';
 }

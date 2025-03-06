@@ -21,4 +21,7 @@ in {
       "${data_folder}/extensions:/var/www/FreshRSS/extensions"
     ];
   };
+  services.caddy.virtualHosts."http://freshrss.server.hs".extraConfig = ''
+    reverse_proxy :8220
+  '';
 }

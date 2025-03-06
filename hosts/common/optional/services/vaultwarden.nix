@@ -1,9 +1,13 @@
 {
   config,
   ...
-}: let
+}:
+let
   backup_dir = "${config.server.dataDir}/Vaultwarden/backup";
-in {
+in
+{
+  #networking.firewall.allowedTCPPorts = [ 8222 ];
+
   services.vaultwarden = {
     enable = true;
     backupDir = backup_dir;
@@ -13,8 +17,13 @@ in {
     };
   };
 
-  services.caddy.virtualHosts."server.local.com:8223".extraConfig = ''
-    reverse_proxy http://127.0.0.1:8222
-    tls internal
-  '';
+  services.caddy.virtualHosts = {
+    "http://server.hs:8224".extraConfig = ''
+      reverse_proxy http://127.0.0.1:8222
+    '';
+    "server.hs:8223".extraConfig = ''
+      reverse_proxy http://127.0.0.1:8222
+      tls internal
+    '';
+  };
 }

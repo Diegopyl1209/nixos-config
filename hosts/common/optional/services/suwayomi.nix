@@ -14,7 +14,7 @@ in {
   virtualisation.oci-containers.containers.suwayomi = {
     image = "ghcr.io/suwayomi/tachidesk:stable";
     ports = [
-      "100.64.0.5:9900:4567"
+      "9900:4567"
     ];
     environment = {
       DOWNLOAD_AS_CBZ = "true";
@@ -29,4 +29,8 @@ in {
       "${data_folder}/files:/home/suwayomi/.local/share/Tachidesk"
     ];
   };
+
+  services.caddy.virtualHosts."http://suwayomi.server.hs".extraConfig = ''
+    reverse_proxy :9900
+  '';
 }
