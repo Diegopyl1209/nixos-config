@@ -19,6 +19,7 @@
       ./grub.nix
       ./nix-index.nix
       ./openssh.nix
+      ./sops.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 

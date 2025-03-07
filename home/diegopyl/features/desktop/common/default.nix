@@ -10,6 +10,7 @@
     ./zen-browser.nix
     ./runelite.nix
     ./mimeapps.nix
+    ./emacs.nix
   ];
 
   home.packages = [

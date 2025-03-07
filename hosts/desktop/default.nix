@@ -19,6 +19,7 @@
     ../common/optional/quietboot.nix
     ../common/optional/nginx.nix
     ../common/optional/steam.nix
+    ../common/optional/emacs.nix
   ];
 
   server = {

@@ -9,9 +9,11 @@
   package = pkgs.autobrr;
   username = "diegopyl";
 in {
-  /*networking.firewall = {
+  /*
+    networking.firewall = {
     allowedTCPPorts = [7474];
-  };*/
+  };
+  */
 
   systemd.tmpfiles.rules = [
     "d '${data_folder}' 0700 ${username} users - -"

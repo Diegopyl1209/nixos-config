@@ -21,6 +21,7 @@
       helix.enable = true;
       bat.enable = true;
       gnome.enable = true;
+      emacs.enable = true;
     };
   };
 

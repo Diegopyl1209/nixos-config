@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: let
+{config, ...}: let
   data_folder = "${config.server.dataDir}/Shoko";
   media_folder = "${config.server.mediaDir}/R18";
   downloads_folder = "${config.server.mediaDir}/download";

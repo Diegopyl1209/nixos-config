@@ -6,7 +6,7 @@
   };
 
   services.caddy = {
-    virtualHosts."http://paperless.server.hs" = {
+    virtualHosts."paperless.diegopyl.me" = {
       extraConfig = ''
         reverse_proxy :8444
       '';

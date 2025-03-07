@@ -1,11 +1,6 @@
-{
-  config,
-  ...
-}:
-let
+{config, ...}: let
   backup_dir = "${config.server.dataDir}/Vaultwarden/backup";
-in
-{
+in {
   #networking.firewall.allowedTCPPorts = [ 8222 ];
 
   services.vaultwarden = {
