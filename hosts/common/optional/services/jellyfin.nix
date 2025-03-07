@@ -31,7 +31,8 @@
     jellyfin-ffmpeg
   ];
 
-  services.caddy.virtualHosts."http://jellyfin.server.hs".extraConfig = ''
+  services.caddy.virtualHosts."jellyfin.diegopyl.me".extraConfig = ''
     reverse_proxy :8096
+    tls /var/lib/acme/diegopyl.me/cert.pem /var/lib/acme/diegopyl.me/key.pem
   '';
 }

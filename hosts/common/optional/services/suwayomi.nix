@@ -30,7 +30,8 @@ in {
     ];
   };
 
-  services.caddy.virtualHosts."http://suwayomi.server.hs".extraConfig = ''
+  services.caddy.virtualHosts."suwayomi.diegopyl.me".extraConfig = ''
     reverse_proxy :9900
+    tls /var/lib/acme/diegopyl.me/cert.pem /var/lib/acme/diegopyl.me/key.pem
   '';
 }

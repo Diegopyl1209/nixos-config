@@ -35,7 +35,8 @@ in {
     };
   };
 
-  services.caddy.virtualHosts."http://autobrr.server.hs".extraConfig = ''
+  services.caddy.virtualHosts."autobrr.diegopyl.me".extraConfig = ''
     reverse_proxy :7474
+    tls /var/lib/acme/diegopyl.me/cert.pem /var/lib/acme/diegopyl.me/key.pem
   '';
 }

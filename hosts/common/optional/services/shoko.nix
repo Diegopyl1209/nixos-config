@@ -19,7 +19,8 @@ in {
     ];
   };
 
-  services.caddy.virtualHosts."http://shoko.server.hs".extraConfig = ''
+  services.caddy.virtualHosts."shoko.diegopyl.me".extraConfig = ''
     reverse_proxy :8111
+    tls /var/lib/acme/diegopyl.me/cert.pem /var/lib/acme/diegopyl.me/key.pem
   '';
 }

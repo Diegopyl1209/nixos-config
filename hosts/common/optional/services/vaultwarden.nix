@@ -13,12 +13,9 @@ in {
   };
 
   services.caddy.virtualHosts = {
-    "http://server.hs:8224".extraConfig = ''
-      reverse_proxy http://127.0.0.1:8222
-    '';
-    "server.hs:8223".extraConfig = ''
-      reverse_proxy http://127.0.0.1:8222
-      tls internal
+    "vaultwarden.diegopyl.me".extraConfig = ''
+      reverse_proxy :8222
+      tls /var/lib/acme/diegopyl.me/cert.pem /var/lib/acme/diegopyl.me/key.pem
     '';
   };
 }
