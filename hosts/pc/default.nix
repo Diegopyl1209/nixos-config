@@ -19,19 +19,13 @@
     ../common/optional/quietboot.nix
     ../common/optional/nginx.nix
     ../common/optional/steam.nix
-    ../common/optional/emacs.nix
   ];
-
-  server = {
-    dataDir = "/run/media/hdd1/Server/Data";
-    mediaDir = "/run/media/hdd1/Server/Media";
-  };
 
   environment.systemPackages = with pkgs; [
     hello
   ];
   networking = {
-    hostName = "desktop";
+    hostName = "pc";
   };
   services.flatpak.enable = true;
   programs.java.enable = true;

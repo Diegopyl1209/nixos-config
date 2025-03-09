@@ -75,8 +75,8 @@
 
     nixosConfigurations = {
       # Main desktop
-      desktop = lib.nixosSystem {
-        modules = [./hosts/desktop];
+      pc = lib.nixosSystem {
+        modules = [./hosts/pc];
         specialArgs = {
           inherit inputs outputs;
         };
@@ -101,8 +101,8 @@
       # Standalone HM only
 
       # Main desktop
-      "diegopyl@desktop" = lib.homeManagerConfiguration {
-        modules = [./home/diegopyl/desktop.nix ./home/diegopyl/nixpkgs.nix];
+      "diegopyl@pc" = lib.homeManagerConfiguration {
+        modules = [./home/diegopyl/pc.nix ./home/diegopyl/nixpkgs.nix];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
