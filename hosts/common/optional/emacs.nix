@@ -1,5 +1,0 @@
-{...}: {
-  services.emacs = {
-    enable = true;
-  };
-}

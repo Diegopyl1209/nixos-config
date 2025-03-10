@@ -1,8 +1,10 @@
 {
   config,
   pkgs,
+  username,
   ...
-}: {
+}:
+{
   home.sessionVariables.EDITOR = "hx";
   home.sessionVariables.COLORTERM = "truecolor";
 
@@ -25,12 +27,17 @@
       language = [
         {
           name = "nix";
-          language-servers = ["nixd" "nil"];
+          language-servers = [
+            "nixd"
+            "nil"
+          ];
         }
       ];
       language-server.nixd = {
         command = "nixd";
-        config.formatting.command = "alejandra";
+        config = {
+          formatting.command = "alejandra";
+        };
       };
     };
   };

@@ -31,8 +31,8 @@
     base16 = {
       url = "github:SenchoPens/base16.nix";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {

@@ -16,4 +16,6 @@
   stable = final: _: {
     stable = inputs.nixpkgs-stable.legacyPackages.${final.system};
   };
+
+  emacs-overlay = inputs.emacs-overlay.overlays.default;
 }

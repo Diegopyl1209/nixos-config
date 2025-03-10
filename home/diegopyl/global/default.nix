@@ -12,6 +12,7 @@
       inputs.base16.nixosModule
       ../features/cli
       ../features/helix
+      ../features/emacs
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);
 
