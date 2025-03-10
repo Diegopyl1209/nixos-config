@@ -4,9 +4,7 @@
   ...
 }: {
   imports = [
-    inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t490
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
     ./hardware-configuration.nix
@@ -21,17 +19,14 @@
     ../common/optional/steam.nix
   ];
 
-  server = {
-    dataDir = "/run/media/hdd1/Server/Data";
-    mediaDir = "/run/media/hdd1/Server/Media";
-  };
-
   environment.systemPackages = with pkgs; [
     hello
   ];
   networking = {
-    hostName = "desktop";
+    hostName = "laptop";
   };
+  services.flatpak.enable = true;
+  programs.java.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
@@ -43,6 +38,5 @@
   };
 
   hardware.graphics.enable = true;
-
   system.stateVersion = "22.05";
 }
