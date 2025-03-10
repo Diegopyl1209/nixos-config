@@ -1,0 +1,16 @@
+#+PROPERTY: header-args :tangle config.el
+#+TITLE: Diegopyl GNU Emacs Config
+
+** Appeareance
+#+begin_src elisp
+
+(menu-bar-mode 0)
+(load-theme 'base16-gruvbox-material-dark-hard)
+
+#+end_src
+
+** Load Evil Mode
+#+begin_src emacs-lisp
+(evil-mode 1)
+#+end_src
+

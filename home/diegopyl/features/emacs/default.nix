@@ -10,11 +10,12 @@
     package = (
       pkgs.emacsWithPackagesFromUsePackage {
         package = pkgs.emacs;
-        config = ./emacs.el;
+        config = ./config.org;
         defaultInitFile = true;
         extraEmacsPackages = epkgs: [
           epkgs.use-package
           epkgs.vterm
+          epkgs.evil
         ];
       }
     );
