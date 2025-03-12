@@ -17,11 +17,15 @@
           epkgs.diminish
           epkgs.vterm
           epkgs.evil
+          epkgs.evil-collection
+          epkgs.evil-tutor
+          epkgs.general
           epkgs.ivy
           epkgs.counsel
           epkgs.swiper
           epkgs.doom-modeline
           epkgs.doom-themes
+          epkgs.ace-window
         ];
       }
     );
