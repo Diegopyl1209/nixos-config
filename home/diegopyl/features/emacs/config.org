@@ -34,7 +34,7 @@
 
   (doom-modeline-mode 1)
 
-  (load-theme 'doom-gruvbox)
+  (load-theme 'doom-gruvbox t)
 
   (add-to-list 'default-frame-alist '(background-color . "#202020"))
 
