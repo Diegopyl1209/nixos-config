@@ -40,54 +40,53 @@
 
 #+end_src
 
+* Undo-Tree
+#+begin_src elisp
+  (setq undo-tree-auto-save-history t)
+  (global-undo-tree-mode)
+
+#+end_src
+
 * Load Evil Mode
 #+begin_src elisp
-
-  (evil-mode 1)
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-tree)
+  (evil-mode 1)
   (evil-collection-init)
-  
-#+end_src
+ #+end_src
 
 * Ivy
 #+begin_src elisp
-
-  (diminish 'ivy-mode) 
+  
+  ;(diminish 'ivy-mode) 
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
-  ;; enable this if you want `swiper' to use it
-  ;; (setq search-default-mode #'char-fold-to-regexp)
-  (global-set-key "\C-s" 'swiper)
-  (global-set-key (kbd "C-c C-r") 'ivy-resume)
-  (global-set-key (kbd "<f6>") 'ivy-resume)
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-  (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
-  (global-set-key (kbd "<f1> l") 'counsel-find-library)
-  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-  (global-set-key (kbd "C-c g") 'counsel-git)
-  (global-set-key (kbd "C-c j") 'counsel-git-grep)
-  (global-set-key (kbd "C-c k") 'counsel-ag)
-  (global-set-key (kbd "C-x l") 'counsel-locate)
-  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-
 #+end_src
 
 * General Keybindings
 #+begin_src elisp
   (general-define-key
     "<escape>" 'keyboard-escape-quit
-   "M-o" 'ace-window)
+   "M-o" 'ace-window
+   "\C-s" 'swiper
+   "C-c C-r" 'ivy-resume
+   "<f6>" 'ivy-resume
+   "M-x" 'counsel-M-x
+   "C-x C-f" 'counsel-find-file
+   "<f1> f" 'counsel-describe-function
+   "<f1> v" 'counsel-describe-variable
+   "<f1> o" 'counsel-describe-symbol
+   "<f1> l" 'counsel-find-library
+   "<f2> i" 'counsel-info-lookup-symbol
+   "<f2> u" 'counsel-unicode-char 
+   )
 
+  ; make C-c dont work in insert mode to avoid issues with ctrl-c in vterm or similars
   (general-create-definer my-leader-def
     :states '(normal visual emacs)
     :prefix "C-c")
-  
+
   (my-leader-def
     "b" '(:ignore t)
     "bb" 'switch-to-buffer
@@ -95,8 +94,12 @@
     "bn" 'next-buffer
     "bp" 'previous-buffer
     "br" 'revert-buffer
+    "g" 'counsel-git
+    "j" 'counsel-git-grep
+    "l" 'counsel-locate
     "a" 'org-agenda
-    "c" 'org-capture)
+    "c" 'org-capture  
+   )
 
   (general-define-key
    :states '(normal visual)

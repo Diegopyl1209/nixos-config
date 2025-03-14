@@ -26,6 +26,7 @@
           epkgs.doom-modeline
           epkgs.doom-themes
           epkgs.ace-window
+          epkgs.undo-tree
         ];
       }
     );
