@@ -1,4 +1,4 @@
-#+PROPERTY: header-args :tangle config.el
+#+PROPERTY: header-args :tangle config.el :results silent 
 #+TITLE: Diegopyl GNU Emacs Config
 
 * Appeareance
@@ -20,12 +20,13 @@
 #+end_src
 *** Make line numbers dont appear in certain modes
 #+begin_src elisp
-(dolist (mode '(org-mode-hook
-                    term-mode-hook
-                    vterm-mode-hook
-                    shell-mode-hook
-                    treemacs-mode-hook))
-      (add-hook mode (lambda() (display-line-numbers-mode 0))))
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                      vterm-mode-hook
+                      shell-mode-hook
+  		    doc-view-mode-hook
+                      treemacs-mode-hook))
+        (add-hook mode (lambda() (display-line-numbers-mode 0))))
 #+end_src
 
 ** Theme and Modeline
@@ -35,16 +36,49 @@
   (doom-modeline-mode 1)
 
   (load-theme 'doom-gruvbox t)
+  ;(custom-theme-set-faces 'doom-gruvbox `(default ((t (:background "#202020")))))
 
   (add-to-list 'default-frame-alist '(background-color . "#202020"))
 
 #+end_src
 
+** Fonts
+#+begin_src elisp
+  (set-face-attribute 'default nil :font "Fira Code NerdFont")
+#+end_src
+
+* Keep my folders clean
+#+begin_src elisp
+  (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
+
+  (setq auto-save-file-name-transforms
+        '((".*" "~/.emacs.d/autosave/" t)))
+
+  (setq backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups" user-emacs-directory))))
+
+  ; turn off lock files
+  (setq create-lockfiles nil)
+
+  (setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
+
+#+end_src
+
 * Undo-Tree
 #+begin_src elisp
-  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-auto-save-history nil)
   (global-undo-tree-mode)
 
+#+end_src
+
+* Raimbow Delimiters
+#+begin_src elisp
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  
+#+end_src
+
+* Whitch Key
+#+begin_src elisp
+  (which-key-mode 1)
 #+end_src
 
 * Load Evil Mode
@@ -53,21 +87,57 @@
   (setq evil-undo-system 'undo-tree)
   (evil-mode 1)
   (evil-collection-init)
- #+end_src
+#+end_src
 
 * Ivy
 #+begin_src elisp
-  
   ;(diminish 'ivy-mode) 
+  (setq ivy-use-virtual-buffers nil)
+  (setq enable-recursive-minibuffers t) 
   (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
+
+  ; Ivy-rich
+  (ivy-rich-mode 1)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  (setq ivy-rich-path-style 'abbrev)
+#+end_src
+
+* LSP-Mode
+#+begin_src elisp
+  ; optimization
+  (setq gc-cons-threshold 100000000)
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+
+  (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-enable-which-key-integration t)
+#+end_src
+** Language Servers
+#+begin_src elisp
+
+  ; nix
+  (add-hook 'nix-mode-hook 'lsp)
+  ;kotlin
+  (add-hook 'kotlin-mode-hook 'lsp)
+#+end_src
+
+* Projectile
+#+begin_src elisp
+  (projectile-mode 1)
+  (setq projectile-project-search-path '("~/Projects/Code" "~/Documents/Github"))
+  (setq projectile-switch-project-action #'projectile-dired)
+#+end_src
+
+* Dired
+#+begin_src elisp
+  (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-listing-switches "-alh")
 #+end_src
 
 * General Keybindings
 #+begin_src elisp
+
   (general-define-key
-    "<escape>" 'keyboard-escape-quit
+   "<escape>" 'keyboard-escape-quit
    "M-o" 'ace-window
    "\C-s" 'swiper
    "C-c C-r" 'ivy-resume
@@ -88,23 +158,36 @@
     :prefix "C-c")
 
   (my-leader-def
-    "b" '(:ignore t)
-    "bb" 'switch-to-buffer
-    "bk" 'kill-buffer
-    "bn" 'next-buffer
-    "bp" 'previous-buffer
-    "br" 'revert-buffer
+    "b" '(:ignore t :wk "Buffer")
+    "bb" '(switch-to-buffer :wk "Switch to Buffer")
+    "bk" '(kill-buffer :wk "Kill Buffer")
+    "bn" '(next-buffer :wk "Next Buffer")
+    "bp" '(previous-buffer :wk "Previous Buffer")
+    "br" '(revert-buffer :wk "Restore Buffer")
     "g" 'counsel-git
     "j" 'counsel-git-grep
-    "l" 'counsel-locate
     "a" 'org-agenda
-    "c" 'org-capture  
-   )
-
+    "c" 'org-capture
+  )
+#+end_src
+** Projectile Keybindings
+#+begin_src elisp
+  ; projectile
+  (my-leader-def projectile-mode-map
+    "p" 'projectile-command-map
+  )
+  (general-define-key
+   :keymap projectile-command-map
+   :states '(normal visual)
+   "n" 'projectile-command-map
+  )
+#+end_src
+** Org-Mode Keybindings
+#+begin_src elisp
   (general-define-key
    :states '(normal visual)
    :keymaps 'org-mode-map
    "gj" 'org-next-visible-heading
-   "gk" 'org-previous-visible-heading)
-
+   "gk" 'org-previous-visible-heading
+  )
 #+end_src

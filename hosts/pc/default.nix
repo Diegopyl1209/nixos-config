@@ -20,6 +20,7 @@
     ../common/optional/quietboot.nix
     ../common/optional/nginx.nix
     ../common/optional/steam.nix
+    ../common/optional/fonts.nix
   ];
 
   environment.systemPackages = with pkgs; [
