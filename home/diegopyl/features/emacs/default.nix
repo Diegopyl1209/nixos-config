@@ -34,13 +34,15 @@
           epkgs.company
           epkgs.projectile
           epkgs.magit
+          epkgs.sudo-edit
 
           # Languages
+	  epkgs.treesit-grammars.with-all-grammars
           epkgs.lsp-mode
-          epkgs.nix-mode
+          epkgs.nix-ts-mode
           epkgs.kotlin-mode
           pkgs.kotlin-language-server
-        ];
+	];
       }
     );
   };

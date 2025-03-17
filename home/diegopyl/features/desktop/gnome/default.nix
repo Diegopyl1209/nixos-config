@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   lib,
   ...
 }:
@@ -22,6 +21,10 @@ with lib.hm.gvariant; {
     gnomeExtensions.bluetooth-battery-meter
     gnomeExtensions.app-menu-is-back
   ];
+
+  xdg.portal = {
+    enable = true;
+  };
 
   dconf.settings = {
     "org/gnome/desktop/search-providers" = {

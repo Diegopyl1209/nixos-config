@@ -4,7 +4,6 @@
 * Appeareance
 ** Disable Menubar, Toolbars and Scrollbar
 #+begin_src elisp
-
   (menu-bar-mode 0)
   (tool-bar-mode 0)
   (tooltip-mode 0)
@@ -39,7 +38,6 @@
   ;(custom-theme-set-faces 'doom-gruvbox `(default ((t (:background "#202020")))))
 
   (add-to-list 'default-frame-alist '(background-color . "#202020"))
-
 #+end_src
 
 ** Fonts
@@ -113,9 +111,9 @@
 #+end_src
 ** Language Servers
 #+begin_src elisp
-
   ; nix
-  (add-hook 'nix-mode-hook 'lsp)
+  (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-ts-mode))
+  (add-hook 'nix-ts-mode-hook 'lsp)
   ;kotlin
   (add-hook 'kotlin-mode-hook 'lsp)
 #+end_src
@@ -131,6 +129,17 @@
 #+begin_src elisp
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-listing-switches "-alh")
+#+end_src
+
+* Org-mode
+** org-tempo
+#+begin_src elisp
+  (require 'org-tempo)
+#+end_src
+
+* Sudo Edit
+#+begin_src elisp
+  
 #+end_src
 
 * General Keybindings
@@ -152,10 +161,16 @@
    "<f2> u" 'counsel-unicode-char 
    )
 
-  ; make C-c dont work in insert mode to avoid issues with ctrl-c in vterm or similars
   (general-create-definer my-leader-def
-    :states '(normal visual emacs)
-    :prefix "C-c")
+    :states '(normal insert visual emacs)
+    :keymaps 'override
+    :prefix "SPC"
+    :global-prefix "M-SPC"
+    )
+
+  (my-leader-def
+    "." '(find-file :wk "Find file")
+    )
 
   (my-leader-def
     "b" '(:ignore t :wk "Buffer")
@@ -169,17 +184,25 @@
     "a" 'org-agenda
     "c" 'org-capture
   )
+
+  (my-leader-def
+    "h" '(:ignore t :wk "Help")
+    "hf" '(describe-function :wk "Describe Function")
+    "hv" '(describe-variable :wk "Describe Variable")
+  )
+
+  (my-leader-def
+    "t" '(:ignore t :wk "Toggle")
+    "tl" '(display-line-numbers-mode :wk "Toggle line numbers")
+    "tt" '(visual-line-mode :wk "Toggle truncated lines")
+   )
+
 #+end_src
 ** Projectile Keybindings
 #+begin_src elisp
   ; projectile
   (my-leader-def projectile-mode-map
     "p" 'projectile-command-map
-  )
-  (general-define-key
-   :keymap projectile-command-map
-   :states '(normal visual)
-   "n" 'projectile-command-map
   )
 #+end_src
 ** Org-Mode Keybindings
@@ -189,5 +212,12 @@
    :keymaps 'org-mode-map
    "gj" 'org-next-visible-heading
    "gk" 'org-previous-visible-heading
+  )
+#+end_src
+** Sudo-Edit Keybindinds
+#+begin_src elisp
+  (my-leader-def
+    "fu" '(sudo-edit-find-file :wk "Sudo find file")
+    "fU" '(sudo-edit :wk "Sudo edit file")
   )
 #+end_src
