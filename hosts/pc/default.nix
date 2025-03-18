@@ -1,5 +1,5 @@
 {
-  pkgs,
+  username,
   inputs,
   ...
 }: {
@@ -8,44 +8,18 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-pc-ssd
-
-    ./hardware-configuration.nix
-
-    ../common/global
-    ../common/users/diegopyl
-
-    ../common/optional/gnome.nix
-    ../common/optional/xdg-portal.nix
-    ../common/optional/pipewire.nix
-    ../common/optional/quietboot.nix
-    ../common/optional/nginx.nix
-    ../common/optional/steam.nix
-    ../common/optional/fonts.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    hello
-  ];
-  networking = {
-    hostName = "pc";
-  };
-  services.flatpak.enable = true;
   programs.java.enable = true;
 
-  boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-  };
+  server.enable = false;
 
-  programs = {
-    adb.enable = true;
-    dconf.enable = true;
-  };
-
-  hardware.graphics.enable = true;
-
-  nixos.nvidia = {
-    enable = true;
-    version = "beta";
+  nixos = {
+    amdgpu.enable = false;
+    nvidia = {
+      version = "beta";
+      enable = true;
+    };
   };
 
   fileSystems = {
@@ -58,6 +32,4 @@
       fsType = "btrfs";
     };
   };
-
-  system.stateVersion = "22.05";
 }
