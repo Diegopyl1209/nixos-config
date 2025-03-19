@@ -19,6 +19,7 @@
         helix.enable = true;
         bat.enable = true;
         gnome.enable = true;
+        #nixvim.enable = true;
       };
     };
 

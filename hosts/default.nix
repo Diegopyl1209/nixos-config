@@ -22,6 +22,7 @@
       ../home
       ../options/home
       inputs.stylix.homeManagerModules.stylix
+      inputs.nixvim.homeManagerModules.nixvim
       inputs.base16.nixosModule
     ];
   in

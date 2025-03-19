@@ -31,28 +31,35 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = {
-    nixpkgs,
-    self,
-    ...
-  } @ inputs: let
-    username = "diegopyl";
-    userfullname = "Diego Peña y Lillo";
-    useremail = "diegopyl1209@gmail.com";
-
-    system = "x86_64-linux";
-
-    commonInherits = {
-      inherit (nixpkgs) lib;
-      inherit self inputs;
-      inherit username userfullname useremail;
-      inherit system;
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-  in {
-    nixosConfigurations = import ./hosts (commonInherits // {isNixOS = true;});
-
-    homeConfigurations = import ./hosts (commonInherits // {isNixOS = false;});
   };
+
+  outputs =
+    {
+      nixpkgs,
+      self,
+      ...
+    }@inputs:
+    let
+      username = "diegopyl";
+      userfullname = "Diego Peña y Lillo";
+      useremail = "diegopyl1209@gmail.com";
+
+      system = "x86_64-linux";
+
+      commonInherits = {
+        inherit (nixpkgs) lib;
+        inherit self inputs;
+        inherit username userfullname useremail;
+        inherit system;
+      };
+    in
+    {
+      nixosConfigurations = import ./hosts (commonInherits // { isNixOS = true; });
+
+      homeConfigurations = import ./hosts (commonInherits // { isNixOS = false; });
+    };
 }
