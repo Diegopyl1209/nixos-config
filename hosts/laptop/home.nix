@@ -8,5 +8,7 @@
     };
     gnome.enable = true;
     steam.enable = true;
+    gdm.enable = true;
+    tuigreet.enable = false;
   };
 }
