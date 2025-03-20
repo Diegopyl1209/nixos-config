@@ -8,7 +8,8 @@
     ./gh.nix
     ./fzf.nix
     ./helix.nix
-    ./neovim
+    #./neovim
+    ./nixcats
   ];
   home.packages = with pkgs; [
     zip
