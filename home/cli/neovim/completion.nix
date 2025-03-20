@@ -6,6 +6,7 @@
       luasnip.enable = true;
       cmp-omni.enable = true;
       cmp-dap.enable = true;
+      cmp-vimtex.enable = true;
       cmp-nvim-lsp.enable = true;
       cmp-nvim-lsp-document-symbol.enable = true;
       cmp-nvim-lsp-signature-help.enable = true;
@@ -23,6 +24,7 @@
             luasnip = "[snip]";
             buffer = "[buffer]";
             neorg = "[neorg]";
+            vimtex = "[vimtex]";
           };
         };
       };
@@ -63,6 +65,7 @@
               option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
             }
             {name = "neorg";}
+            {name = "vimtex";}
           ];
         };
       };

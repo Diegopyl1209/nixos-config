@@ -9,6 +9,10 @@
     ./plugins/web-devicons.nix
     ./plugins/which-key.nix
     ./plugins/telescope.nix
+    ./plugins/neorg.nix
+    ./plugins/image.nix
+    ./plugins/markdown-preview.nix
+    ./plugins/vimtex.nix
   ];
   programs.nixvim = {
     enable = true;
@@ -17,6 +21,7 @@
       colorscheme = "gruvbox-material-dark-hard";
       settings = {
         cmp = true;
+        telescope_borders = true;
       };
     };
 

@@ -20,5 +20,7 @@
       withTetrioPlus = true;
     }))
     mangohud
+
+    texliveMedium
   ];
 }

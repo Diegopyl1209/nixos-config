@@ -1,5 +1,6 @@
 {
   lib,
+  inputs,
   pkgs,
   ...
 }:
@@ -28,6 +29,9 @@
 
   # Nixpkgs
   nixpkgs = {
+    overlays = [
+      #inputs.emacs-overlay.overlays.default
+    ];
     config = {
       allowUnfree = true;
       permittedInsecurePackages = [
