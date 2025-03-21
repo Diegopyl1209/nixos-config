@@ -7,20 +7,20 @@
   xdg.mimeApps = {
     enable = config.home-manager.graphical.enable;
     defaultApplications = {
-      "text/plain" = "Helix.desktop";
-      "application/x-shellscript" = "Helix.desktop";
-      "text/x-cmake" = "Helix.desktop";
-      "text/markdown" = "Helix.desktop";
-      "application/x-docbook+xml" = "Helix.desktop";
-      "application/json" = "Helix.desktop";
-      "application/x-yaml" = "Helix.desktop";
-      "text/rhtml" = "Helix.desktop";
-      "text/x-tex" = "Helix.desktop";
-      "text/x-java" = "Helix.desktop";
-      "inode/x-empty" = "Helix.desktop";
-      "text/x-python" = "Helix.desktop";
-      "text/x-readme" = "Helix.desktop";
-      "text/x-markdown" = "Helix.desktop";
+      "text/plain" = "nvim.desktop";
+      "application/x-shellscript" = "nvim.desktop";
+      "text/x-cmake" = "nvim.desktop";
+      "text/markdown" = "nvim.desktop";
+      "application/x-docbook+xml" = "nvim.desktop";
+      "application/json" = "nvim.desktop";
+      "application/x-yaml" = "nvim.desktop";
+      "text/rhtml" = "nvim.desktop";
+      "text/x-tex" = "nvim.desktop";
+      "text/x-java" = "nvim.desktop";
+      "inode/x-empty" = "nvim.desktop";
+      "text/x-python" = "nvim.desktop";
+      "text/x-readme" = "nvim.desktop";
+      "text/x-markdown" = "nvim.desktop";
 
       "inode/directory" = "org.gnome.nautilus.desktop";
 

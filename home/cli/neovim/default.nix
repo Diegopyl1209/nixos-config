@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./completion.nix
     ./plugins/lualine.nix
@@ -13,6 +14,13 @@
     ./plugins/markdown-preview.nix
     ./plugins/vimtex.nix
   ];
+
+  home = {
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
+  };
+
   programs.nixvim = {
     enable = true;
     colorschemes.base16 = {

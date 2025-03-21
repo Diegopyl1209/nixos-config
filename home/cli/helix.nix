@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.sessionVariables.EDITOR = "hx";
+  #home.sessionVariables.EDITOR = "hx";
   home.sessionVariables.COLORTERM = "truecolor";
 
   programs.helix = {
