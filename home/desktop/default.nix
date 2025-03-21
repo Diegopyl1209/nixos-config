@@ -6,5 +6,6 @@
     ./gnome.nix
     ./alacritty.nix
     ./zathura.nix
+    ./emacs
   ];
 }
