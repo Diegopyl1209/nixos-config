@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./completion.nix
     ./plugins/lualine.nix

@@ -5,5 +5,6 @@
     ./mimeapps.nix
     ./gnome.nix
     ./alacritty.nix
+    ./zathura.nix
   ];
 }

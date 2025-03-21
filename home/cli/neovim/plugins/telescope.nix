@@ -4,7 +4,7 @@
       enable = true;
 
       settings.defaults = {
-        borderchars = ["─" "│" "─" "│" "┌" "┐" "┘" "└" ];
+        borderchars = ["─" "│" "─" "│" "┌" "┐" "┘" "└"];
         file_ignore_patterns = [
           "^.git/"
           "^.mypy_cache/"
