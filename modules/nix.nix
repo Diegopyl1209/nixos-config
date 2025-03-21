@@ -30,7 +30,7 @@
   # Nixpkgs
   nixpkgs = {
     overlays = [
-      inputs.emacs-overlay.overlays.default
+      #inputs.emacs-overlay.overlays.default
     ];
     config = {
       allowUnfree = true;
