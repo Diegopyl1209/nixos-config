@@ -1,6 +1,10 @@
 {
   programs.nixvim = {
-    opts.completeopt = ["menu" "menuone" "noselect"];
+    opts.completeopt = [
+      "menu"
+      "menuone"
+      "noselect"
+    ];
 
     plugins = {
       luasnip.enable = true;
@@ -17,6 +21,13 @@
 
         cmp = {
           enable = true;
+          after = # lua
+            ''
+                function(entry, vim_item, kind)
+                  vim_item.dup = 0
+                return vim_item
+              end
+            '';
           menu = {
             nvim_lsp = "[LSP]";
             nvim_lua = "[api]";
@@ -34,16 +45,27 @@
         autoEnableSources = true;
 
         settings = {
-          window = let
-            borders = ["┌" "─" "┐" "│" "┘" "─" "└" "│"];
-          in {
-            completion = {
-              border = borders;
+          window =
+            let
+              borders = [
+                "┌"
+                "─"
+                "┐"
+                "│"
+                "┘"
+                "─"
+                "└"
+                "│"
+              ];
+            in
+            {
+              completion = {
+                border = borders;
+              };
+              documentation = {
+                border = borders;
+              };
             };
-            documentation = {
-              border = borders;
-            };
-          };
           snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
           mapping = {
             "<C-d>" = "cmp.mapping.scroll_docs(-4)";
@@ -56,16 +78,16 @@
           };
 
           sources = [
-            {name = "path";}
-            {name = "nvim_lsp";}
-            {name = "luasnip";}
+            { name = "path"; }
+            { name = "nvim_lsp"; }
+            { name = "luasnip"; }
             {
               name = "buffer";
               # Words from other open buffers can also be suggested.
               option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
             }
-            {name = "neorg";}
-            {name = "vimtex";}
+            { name = "neorg"; }
+            { name = "vimtex"; }
           ];
         };
       };
