@@ -16,6 +16,7 @@
     };
   };
   imports = [
+    ./acme.nix
     ./caddy.nix
     ./jellyfin.nix
     ./vaultwarden.nix
