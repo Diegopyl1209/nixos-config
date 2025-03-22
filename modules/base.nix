@@ -56,7 +56,7 @@
   xdg.terminal-exec = {
     enable = true;
     settings = {
-      default = [ "alacritty.desktop" ];
+      default = ["alacritty.desktop"];
     };
   };
 
@@ -78,7 +78,7 @@
     networkmanager.enable = true;
     firewall.enable = lib.mkForce true;
   };
-  
+
   # Printing support
   services.printing = {
     enable = true;
@@ -87,7 +87,7 @@
   };
 
   security.polkit.enable = true;
-  services.flatpak.enable = true;
+  services.flatpak.enable = config.hm.home-manager.graphical.enable;
 
   # Sound
   security.rtkit.enable = true;
