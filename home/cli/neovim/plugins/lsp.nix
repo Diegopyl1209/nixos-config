@@ -1,4 +1,4 @@
-{
+{host, ...}: {
   programs.nixvim = {
     plugins = {
       lsp-format.enable = true;
@@ -25,7 +25,22 @@
 
         servers = {
           lua_ls.enable = true;
-          nixd.enable = true;
+          nixd = {
+            enable = true;
+            settings = {
+              formatting = {
+                command = ["alejandra"];
+              };
+              options = {
+                nixos = {
+                  expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.${host}.options";
+                };
+                home_manager = {
+                  expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).homeConfigurations.${host}.options";
+                };
+              };
+            };
+          };
         };
       };
     };
