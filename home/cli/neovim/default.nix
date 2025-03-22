@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./completion.nix
     ./plugins/lualine.nix
@@ -46,5 +45,11 @@
       expandtab = true;
       autoindent = true;
     };
+
+    extraConfigVim =
+      #vim
+      ''
+        set shortmess+=I
+      '';
   };
 }
