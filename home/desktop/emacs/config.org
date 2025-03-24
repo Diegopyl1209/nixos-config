@@ -1,0 +1,6 @@
+#+PROPERTY: header-args :tangle config.el :results silent 
+#+TITLE: Diegopyl GNU Emacs Config
+
+#+begin_src elisp
+(set-fringe-mode 0)
+#+end_src
