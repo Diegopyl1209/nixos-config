@@ -1,6 +1,6 @@
 {
   description = "My NixOS configuration";
-  
+
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
@@ -44,31 +44,31 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+    };
   };
 
-  outputs =
-    {
-      nixpkgs,
-      self,
-      ...
-    }@inputs:
-    let
-      username = "diegopyl";
-      userfullname = "Diego Peña y Lillo";
-      useremail = "diegopyl1209@gmail.com";
+  outputs = {
+    nixpkgs,
+    self,
+    ...
+  } @ inputs: let
+    username = "diegopyl";
+    userfullname = "Diego Peña y Lillo";
+    useremail = "diegopyl1209@gmail.com";
 
-      system = "x86_64-linux";
+    system = "x86_64-linux";
 
-      commonInherits = {
-        inherit (nixpkgs) lib;
-        inherit self inputs;
-        inherit username userfullname useremail;
-        inherit system;
-      };
-    in
-    {
-      nixosConfigurations = import ./hosts (commonInherits // { isNixOS = true; });
-
-      homeConfigurations = import ./hosts (commonInherits // { isNixOS = false; });
+    commonInherits = {
+      inherit (nixpkgs) lib;
+      inherit self inputs;
+      inherit username userfullname useremail;
+      inherit system;
     };
+  in {
+    nixosConfigurations = import ./hosts (commonInherits // {isNixOS = true;});
+
+    homeConfigurations = import ./hosts (commonInherits // {isNixOS = false;});
+  };
 }
