@@ -13,6 +13,7 @@
     # Development
     jetbrains.idea-ultimate
     android-studio
+    gcc
 
     # Gaming
     prismlauncher
