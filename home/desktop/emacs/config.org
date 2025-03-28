@@ -7,23 +7,46 @@
   (menu-bar-mode 0)
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
-  (set-fringe-mode 10)
 
   ;; Always use spaces for indentation
   (setq-default indent-tabs-mode nil
-		tab-width 2)
-
-  ;; Omit default startup screen
-  (setq inhibit-startup-screen t)
+  	tab-width 2)
 #+end_src
-** Theme and modeline
+** Theme and Modeline
 #+begin_src elisp
   (load-theme 'doom-gruvbox t)
   (doom-modeline-mode t)
+  (setq doom-modeline-persp-name t)
 #+end_src
 ** Font
 #+begin_src elisp
-  ;(set-face-attribute 'default nil :font "Fira Code NerdFont")
+  (set-frame-font "JetBrainsMono Nerd Font Mono" nil t)
+#+end_src
+
+** Window
+*** Window Size
+#+begin_src elisp
+(add-to-list 'default-frame-alist '(height . 40))
+(add-to-list 'default-frame-alist '(width . 100)) 
+#+end_src
+*** Padding between emacs and frame
+#+begin_src elip
+(modify-all-frames-parameters '((internal-border-width . 32)))
+#+end_src
+*** Frame Title
+#+begin_src elisp
+  (setq frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 #+end_src
 
 ** Enable Column numbers
@@ -37,7 +60,6 @@
   (global-display-line-numbers-mode t)
   (global-visual-line-mode t)
 #+end_src
-
 *** Make Line numbers dont appear in certain modes
 #+begin_src elisp
 (dolist (mode '(org-mode-hook
@@ -48,7 +70,6 @@
 		    treemacs-mode-hook))
       (add-hook mode (lambda() (display-line-numbers-mode 0))))
 #+end_src
-
 ** Keep my folders clean
 #+begin_src elisp
   (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
@@ -72,48 +93,64 @@
 
 * General Keybindings
 #+begin_src elisp
-      (general-define-key
-       "<escape>" 'keyboard-escape-quit
-       "M-o" 'ace-window
-      )
+  (general-define-key
+   "<escape>" 'keyboard-escape-quit
+   "M-o" 'ace-window
+   )
 
-      (general-create-definer my-leader-def
-      :states '(normal insert visual emacs)
-      :keymaps 'override
-      :prefix "SPC"
-      :global-prefix "M-SPC"
-      )
-
-    (my-leader-def
-      "." '(find-file :wk "Find file")
+  (general-create-definer my-leader-def
+    :states '(normal insert visual emacs)
+    :keymaps 'override
+    :prefix "SPC"
+    :global-prefix "M-SPC"
     )
 
-   (my-leader-def
-    "b" '(:ignore t :wk "Buffer")
-    "bb" '(switch-to-buffer :wk "Switch to Buffer")
-    "bk" '(kill-buffer :wk "Kill Buffer")
-    "bn" '(next-buffer :wk "Next Buffer")
-    "bp" '(previous-buffer :wk "Previous Buffer")
-    "br" '(revert-buffer :wk "Restore Buffer")
-    "g" 'counsel-git
-    "j" 'counsel-git-grep
-    "a" 'org-agenda
-    "c" 'org-capture
-  )
-
   (my-leader-def
-    "h" '(:ignore t :wk "Help")
-    "hf" '(describe-function :wk "Describe Function")
-    "hv" '(describe-variable :wk "Describe Variable")
-  )
-
-  (my-leader-def
-    "t" '(:ignore t :wk "Toggle")
-    "tl" '(display-line-numbers-mode :wk "Toggle line numbers")
-    "tt" '(visual-line-mode :wk "Toggle truncated lines")
+   "." '(find-file :wk "Find file")
    )
-  
 
+  (my-leader-def
+   "b" '(:ignore t :wk "Buffer")
+   "bb" '(switch-to-buffer :wk "Switch to Buffer")
+   "bk" '(kill-buffer :wk "Kill Buffer")
+   "bn" '(next-buffer :wk "Next Buffer")
+   "bp" '(previous-buffer :wk "Previous Buffer")
+   "br" '(revert-buffer :wk "Restore Buffer")
+   )
+
+  (my-leader-def
+   "h" '(:ignore t :wk "Help")
+   "hf" '(describe-function :wk "Describe Function")
+   "hv" '(describe-variable :wk "Describe Variable")
+   )
+
+  (my-leader-def
+   "t" '(:ignore t :wk "Toggle")
+   "tl" '(display-line-numbers-mode :wk "Toggle line numbers")
+   "tt" '(visual-line-mode :wk "Toggle truncated lines")
+   )
+
+
+#+end_src
+
+
+
+* Vertico
+#+begin_src elisp
+  (vertico-mode t)
+#+end_src
+** Orderless
+#+begin_src elisp
+  (setq completion-styles '(orderless basic)
+      completion-category-overrides '((file (styles basic partial-completion))))
+#+end_src
+** Marginalia
+#+begin_src elisp
+  (marginalia-mode t)
+#+end_src
+** Savehist
+#+begin_src elisp
+  (savehist-mode)
 #+end_src
 
 * Dired
@@ -149,32 +186,10 @@
   (setq evil-collection-company-use-tng nil)
 #+end_src
 
-* Ivy
-#+begin_src elisp
-  (diminish 'ivy-mode) 
-  (setq ivy-use-virtual-buffers nil)
-  (setq enable-recursive-minibuffers t) 
-  (ivy-mode 1)
-
-  (general-define-key
-   "\C-s" 'swiper
-   "C-c C-r" 'ivy-resume
-   "<f6>" 'ivy-resume
-   "M-x" 'counsel-M-x
-   "C-x C-f" 'counsel-find-file
-   "<f1> f" 'counsel-describe-function
-   "<f1> v" 'counsel-describe-variable
-   "<f1> o" 'counsel-describe-symbol
-   "<f1> l" 'counsel-find-library
-   "<f2> i" 'counsel-info-lookup-symbol
-   "<f2> u" 'counsel-unicode-char 
-   )
-#+end_src
 
 * LSP-Mode
 ** Optimization
 #+begin_src elisp
-  ; optimization
   (setq gc-cons-threshold 100000000)
   (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
@@ -183,37 +198,66 @@
 #+end_src
 
 ** Language Servers
+*** Nix
 #+begin_src elisp
-  ; nix
   (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-ts-mode))
   (add-hook 'nix-ts-mode-hook 'lsp-deferred)
-  
-    
+#+end_src
+*** LaTeX
+#+begin_src elisp
+  (add-hook 'LaTeX-mode-hook #'lsp-deferred)
 #+end_src
 
 * Projectile
 #+begin_src elisp
-    (projectile-mode 1)
-    (setq projectile-project-search-path '("~/Projects/Code"))
-    (setq projectile-switch-project-action #'projectile-dired)
+  (projectile-mode 1)
+  (setq projectile-project-search-path '("~/Projects/Code"))
+  (setq projectile-switch-project-action #'projectile-dired)
 
-    (my-leader-def projectile-mode-map
+  (my-leader-def projectile-mode-map
     "p" 'projectile-command-map
-    )
+  )
 #+end_src
 
 * Org-Mode
+** Keybindings
 #+begin_src elisp
-   (general-define-key
-  :states '(normal visual)
-  :keymaps 'org-mode-map
-  "gj" 'org-next-visible-heading
-  "gk" 'org-previous-visible-heading
-  )
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'org-mode-map
+   "gj" 'org-next-visible-heading
+   "gk" 'org-previous-visible-heading
+   )
 #+end_src
-** Org-modern
+** Org Superstar
 #+begin_src elisp
-  (with-eval-after-load 'org (global-org-modern-mode))
+    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+    ;; (custom-set-faces
+    ;; '(org-level-1 ((t (:inherit outline-1 :height 1.25))))
+    ;; '(org-level-2 ((t (:inherit outline-2 :height 1.2))))
+    ;; '(org-level-3 ((t (:inherit outline-3 :height 1.15))))
+    ;; '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
+    ;; '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+    ;; (set-face-attribute 'org-document-title nil :height 1.5)
+#+end_src
+** LaTeX Previews Scale
+#+begin_src elisp
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 3.0))
+#+end_src
+
+* Company
+#+begin_src elisp
+    (setq company-selection-wrap-around t
+        company-tooltip-align-annotations t
+        company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
+                            company-echo-metadata-frontend))
+  ;(define-key company-active-map (kbd "C-n") 'company-select-next)
+  ;(define-key company-active-map (kbd "C-p") 'company-select-previous)
+#+end_src
+
+* Flycheck
+#+begin_src elisp
+  (global-flycheck-mode t)
 #+end_src
 
 * Sudo-Edit
@@ -224,17 +268,29 @@
     )
 #+end_src
 
-* Company
+* LaTeX
 #+begin_src elisp
-    (setq  company-selection-wrap-around t
-        company-tooltip-align-annotations t
-        company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
-                            company-echo-metadata-frontend))
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-#+end_src
+    (TeX-fold-mode t)
+    (setq +latex-viewers '(pdf-tools))
+    (setq TeX-electric-sub-and-superscript nil)
 
-* Flycheck
-#+begin_src elisp
-  (global-flycheck-mode t)
+    (set-default 'preview-scale-function 1.5)
+    (set-default 'xenops-math-image-scale-factor 3)
+
+    ;; Use pdf-tools to open PDF files
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+        TeX-source-correlate-start-server t)
+
+  ;; Update PDF buffers after successful LaTeX runs
+  (add-hook 'TeX-after-compilation-finished-functions
+            #'TeX-revert-document-buffer)
 #+end_src
+** CDLaTeX
+#+begin_src elisp
+  (add-hook 'LaTeX-mode-hook #'cdlatex-mode)
+#+end_src
+** Xenops
+#+begin_src elisp
+  (add-hook 'LaTeX-mode-hook #'xenops-mode)
+#+end_src
+      

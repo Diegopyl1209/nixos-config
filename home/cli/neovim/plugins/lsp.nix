@@ -41,6 +41,7 @@
               };
             };
           };
+          clangd.enable = true;
         };
       };
     };

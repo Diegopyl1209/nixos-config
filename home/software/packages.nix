@@ -10,6 +10,9 @@
     zoom-us
     mpv
 
+    # Cli Apps
+    ghostscript
+
     # Development
     jetbrains.idea-ultimate
     android-studio

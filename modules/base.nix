@@ -60,6 +60,11 @@
     };
   };
 
+  fonts.packages = [
+    pkgs.dejavu_fonts
+    pkgs.nerd-fonts.dejavu-sans-mono
+  ];
+
   services.tailscale.enable = true;
 
   hardware.graphics.enable = true;

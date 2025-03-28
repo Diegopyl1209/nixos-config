@@ -13,17 +13,19 @@
         defaultInitFile = true;
         extraEmacsPackages = epkgs: [
           pkgs.ghostscript
+          pkgs.texliveMedium
           epkgs.use-package
+          epkgs.all-the-icons
           epkgs.doom-themes
           epkgs.doom-modeline
-          epkgs.org-modern
+          epkgs.org-superstar
           epkgs.diminish
           epkgs.evil
           epkgs.evil-collection
           epkgs.general
-          epkgs.ivy
-          epkgs.counsel
-          epkgs.swiper
+          epkgs.vertico
+          epkgs.orderless
+          epkgs.marginalia
           epkgs.ace-window
           epkgs.undo-tree
           epkgs.flycheck
@@ -31,6 +33,12 @@
           epkgs.projectile
           epkgs.magit
           epkgs.sudo-edit
+          epkgs.pdf-tools
+
+          # LaTeX
+          epkgs.auctex
+          epkgs.cdlatex
+          epkgs.xenops
 
           # Languages
           epkgs.treesit-grammars.with-all-grammars
