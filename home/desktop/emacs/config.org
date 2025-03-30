@@ -1,7 +1,6 @@
 #+PROPERTY: header-args :tangle config.el :results silent
 #+TITLE: Diegopyl GNU Emacs Config
 
-
 * General Settings
 #+begin_src elisp
   (menu-bar-mode 0)
@@ -20,7 +19,7 @@
 #+end_src
 ** Font
 #+begin_src elisp
-  (set-frame-font "JetBrainsMono Nerd Font Mono" nil t)
+  ;;(set-frame-font "JetBrainsMono Nerd Font Mono" nil t)
 #+end_src
 
 ** Window
@@ -98,42 +97,134 @@
    "M-o" 'ace-window
    )
 
-  (general-create-definer my-leader-def
-    :states '(normal insert visual emacs)
-    :keymaps 'override
-    :prefix "SPC"
-    :global-prefix "M-SPC"
-    )
+  ;; (general-create-definer my-leader-def
+  ;;   :states '(normal insert visual emacs)
+  ;;   :keymaps 'override
+  ;;   :prefix "SPC"
+  ;;   :global-prefix "M-SPC"
+  ;;   )
 
-  (my-leader-def
-   "." '(find-file :wk "Find file")
-   )
+  ;; (my-leader-def
+  ;;  "." '(find-file :wk "Find file")
+  ;;  )
 
-  (my-leader-def
-   "b" '(:ignore t :wk "Buffer")
-   "bb" '(switch-to-buffer :wk "Switch to Buffer")
-   "bk" '(kill-buffer :wk "Kill Buffer")
-   "bn" '(next-buffer :wk "Next Buffer")
-   "bp" '(previous-buffer :wk "Previous Buffer")
-   "br" '(revert-buffer :wk "Restore Buffer")
-   )
+  ;; (my-leader-def
+  ;;  "b" '(:ignore t :wk "Buffer")
+  ;;  "bb" '(switch-to-buffer :wk "Switch to Buffer")
+  ;;  "bk" '(kill-buffer :wk "Kill Buffer")
+  ;;  "bn" '(next-buffer :wk "Next Buffer")
+  ;;  "bp" '(previous-buffer :wk "Previous Buffer")
+  ;;  "br" '(revert-buffer :wk "Restore Buffer")
+  ;;  )
 
-  (my-leader-def
-   "h" '(:ignore t :wk "Help")
-   "hf" '(describe-function :wk "Describe Function")
-   "hv" '(describe-variable :wk "Describe Variable")
-   )
+  ;; (my-leader-def
+  ;;  "h" '(:ignore t :wk "Help")
+  ;;  "hf" '(describe-function :wk "Describe Function")
+  ;;  "hv" '(describe-variable :wk "Describe Variable")
+  ;;  )
 
-  (my-leader-def
-   "t" '(:ignore t :wk "Toggle")
-   "tl" '(display-line-numbers-mode :wk "Toggle line numbers")
-   "tt" '(visual-line-mode :wk "Toggle truncated lines")
-   )
+  ;; (my-leader-def
+  ;;  "t" '(:ignore t :wk "Toggle")
+  ;;  "tl" '(display-line-numbers-mode :wk "Toggle line numbers")
+  ;;  "tt" '(visual-line-mode :wk "Toggle truncated lines")
+  ;;  )
 
 
 #+end_src
 
+* Meow
+** Keybindings
+#+begin_src elisp
+  (defun meow-setup ()
+  (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  (meow-motion-define-key
+   '("j" . meow-next)
+   '("k" . meow-prev)
+   '("<escape>" . ignore))
+  (meow-leader-define-key
+   ;; Use SPC (0-9) for digit arguments.
+   '("1" . meow-digit-argument)
+   '("2" . meow-digit-argument)
+   '("3" . meow-digit-argument)
+   '("4" . meow-digit-argument)
+   '("5" . meow-digit-argument)
+   '("6" . meow-digit-argument)
+   '("7" . meow-digit-argument)
+   '("8" . meow-digit-argument)
+   '("9" . meow-digit-argument)
+   '("0" . meow-digit-argument)
+   '("/" . meow-keypad-describe-key)
+   '("?" . meow-cheatsheet))
+  (meow-normal-define-key
+   '("0" . meow-expand-0)
+   '("9" . meow-expand-9)
+   '("8" . meow-expand-8)
+   '("7" . meow-expand-7)
+   '("6" . meow-expand-6)
+   '("5" . meow-expand-5)
+   '("4" . meow-expand-4)
+   '("3" . meow-expand-3)
+   '("2" . meow-expand-2)
+   '("1" . meow-expand-1)
+   '("-" . negative-argument)
+   '(";" . meow-reverse)
+   '("," . meow-inner-of-thing)
+   '("." . meow-bounds-of-thing)
+   '("[" . meow-beginning-of-thing)
+   '("]" . meow-end-of-thing)
+   '("a" . meow-append)
+   '("A" . meow-open-below)
+   '("b" . meow-back-word)
+   '("B" . meow-back-symbol)
+   '("c" . meow-change)
+   '("d" . meow-delete)
+   '("D" . meow-backward-delete)
+   '("e" . meow-next-word)
+   '("E" . meow-next-symbol)
+   '("f" . meow-find)
+   '("g" . meow-cancel-selection)
+   '("G" . meow-grab)
+   '("h" . meow-left)
+   '("H" . meow-left-expand)
+   '("i" . meow-insert)
+   '("I" . meow-open-above)
+   '("j" . meow-next)
+   '("J" . meow-next-expand)
+   '("k" . meow-prev)
+   '("K" . meow-prev-expand)
+   '("l" . meow-right)
+   '("L" . meow-right-expand)
+   '("m" . meow-join)
+   '("n" . meow-search)
+   '("o" . meow-block)
+   '("O" . meow-to-block)
+   '("p" . meow-yank)
+   '("q" . meow-quit)
+   '("Q" . meow-goto-line)
+   '("r" . meow-replace)
+   '("R" . meow-swap-grab)
+   '("s" . meow-kill)
+   '("t" . meow-till)
+   '("u" . meow-undo)
+   '("U" . meow-undo-in-selection)
+   '("v" . meow-visit)
+   '("w" . meow-mark-word)
+   '("W" . meow-mark-symbol)
+   '("x" . meow-line)
+   '("X" . meow-goto-line)
+   '("y" . meow-save)
+   '("Y" . meow-sync-grab)
+   '("z" . meow-pop-selection)
+   '("'" . repeat)
+   '("<escape>" . ignore)))
+#+end_src
 
+** Setup
+#+begin_src elisp
+  (require 'meow)
+  (meow-setup)
+  (meow-global-mode 1)
+#+end_src
 
 * Vertico
 #+begin_src elisp
@@ -166,27 +257,6 @@
   (global-undo-tree-mode)
 #+end_src
 
-* Evil
-#+begin_src elisp
-  (defun save-and-kill-this-buffer()(interactive)(save-buffer)(kill-current-buffer))
-
-  (evil-mode t)
-  (setq evil-want-C-u-scroll t
-         evil-want-keybinding nil
-         evil-shift-width 2)
-  (setq evil-undo-system 'undo-tree)
-
-  ;; Kill buffer instead of closing emacs
-  (evil-ex-define-cmd "q" #'kill-current-buffer)
-  (evil-ex-define-cmd "wq" 'save-and-kill-this-buffer)
-
-#+end_src
-** Evil Collection
-#+begin_src elisp
-  (setq evil-collection-company-use-tng nil)
-#+end_src
-
-
 * LSP-Mode
 ** Optimization
 #+begin_src elisp
@@ -214,40 +284,37 @@
   (setq projectile-project-search-path '("~/Projects/Code"))
   (setq projectile-switch-project-action #'projectile-dired)
 
-  (my-leader-def projectile-mode-map
-    "p" 'projectile-command-map
+  (general-def projectile-mode-map
+    "M-p" 'projectile-command-map
   )
 #+end_src
 
 * Org-Mode
+#+begin_src elisp
+  (require 'org)
+#+end_src
 ** Keybindings
 #+begin_src elisp
-  (general-define-key
-   :states '(normal visual)
-   :keymaps 'org-mode-map
-   "gj" 'org-next-visible-heading
-   "gk" 'org-previous-visible-heading
-   )
+  ;; (general-define-key
+  ;;  :states '(normal visual)
+  ;;  :keymaps 'org-mode-map
+  ;;  "gj" 'org-next-visible-heading
+  ;;  "gk" 'org-previous-visible-heading
+  ;;  )
 #+end_src
 ** Org Superstar
 #+begin_src elisp
-    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-    ;; (custom-set-faces
-    ;; '(org-level-1 ((t (:inherit outline-1 :height 1.25))))
-    ;; '(org-level-2 ((t (:inherit outline-2 :height 1.2))))
-    ;; '(org-level-3 ((t (:inherit outline-3 :height 1.15))))
-    ;; '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
-    ;; '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
-    ;; (set-face-attribute 'org-document-title nil :height 1.5)
+    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))  
 #+end_src
 ** LaTeX Previews Scale
 #+begin_src elisp
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 3.0))
+  (plist-put org-format-latex-options :scale 2.5)
 #+end_src
 
 * Company
 #+begin_src elisp
-    (setq company-selection-wrap-around t
+  (company-tng-mode t)
+  (setq company-selection-wrap-around t
         company-tooltip-align-annotations t
         company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
@@ -260,12 +327,17 @@
   (global-flycheck-mode t)
 #+end_src
 
+* Whitch Key
+#+begin_src elisp
+  (which-key-mode 1)
+#+end_src
+
 * Sudo-Edit
 #+begin_src elisp
-  (my-leader-def
-    "fu" '(sudo-edit-find-file :wk "Sudo find file")
-    "fU" '(sudo-edit :wk "Sudo edit file")
-    )
+  ;; (my-leader-def
+  ;;   "fu" '(sudo-edit-find-file :wk "Sudo find file")
+  ;;   "fU" '(sudo-edit :wk "Sudo edit file")
+  ;;   )
 #+end_src
 
 * LaTeX

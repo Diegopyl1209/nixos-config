@@ -70,6 +70,7 @@ with lib.hm.gvariant; {
         toggle-fullscreen = ["<Super>g"];
         maximize = ["<Super>x"];
         unmaximize = ["<Super>c"];
+        activate-window-menu = [];
       };
 
       "org/gnome/shell/keybindings" = {

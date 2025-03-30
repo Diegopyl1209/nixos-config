@@ -8,7 +8,7 @@
     enable = true;
     package = (
       pkgs.emacsWithPackagesFromUsePackage {
-        package = pkgs.emacs-git-pgtk;
+        package = pkgs.emacs; #pkgs.emacs-git-pgtk;
         config = ./config.org;
         defaultInitFile = true;
         extraEmacsPackages = epkgs: [
@@ -20,8 +20,8 @@
           epkgs.doom-modeline
           epkgs.org-superstar
           epkgs.diminish
-          epkgs.evil
-          epkgs.evil-collection
+          #epkgs.evil
+          #epkgs.evil-collection
           epkgs.general
           epkgs.vertico
           epkgs.orderless
@@ -34,6 +34,7 @@
           epkgs.magit
           epkgs.sudo-edit
           epkgs.pdf-tools
+          epkgs.meow
 
           # LaTeX
           epkgs.auctex
