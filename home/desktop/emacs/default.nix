@@ -2,6 +2,7 @@
   services.emacs = {
     enable = true;
     client.enable = true;
+    startWithUserSession = "graphical";
   };
 
   programs.emacs = {
@@ -16,12 +17,11 @@
           pkgs.texliveMedium
           epkgs.use-package
           epkgs.all-the-icons
+          epkgs.base16-theme
           epkgs.doom-themes
           epkgs.doom-modeline
           epkgs.org-superstar
           epkgs.diminish
-          #epkgs.evil
-          #epkgs.evil-collection
           epkgs.general
           epkgs.vertico
           epkgs.orderless
