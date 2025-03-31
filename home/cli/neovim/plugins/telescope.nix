@@ -1,20 +1,20 @@
+{ pkgs, ... }:
 {
-  programs.nixvim = {
-    plugins.telescope = {
-      enable = true;
+  programs.neovim = {
+    plugins = [
+      pkgs.vimPlugins.telescope-nvim
+    ];
 
-      settings.defaults = {
-        borderchars = ["─" "│" "─" "│" "┌" "┐" "┘" "└"];
-        file_ignore_patterns = [
-          "^.git/"
-          "^.mypy_cache/"
-          "^__pycache__/"
-          "^output/"
-          "^data/"
-          "%.ipynb"
-        ];
-        set_env.COLORTERM = "truecolor";
-      };
-    };
+    extraLuaConfig = # lua
+      ''
+        require("telescope").setup({
+          defaults = {
+             borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+             file_ignore_patterns = { "^.git/" },
+          }
+        })
+
+      '';
+
   };
 }
