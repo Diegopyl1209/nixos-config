@@ -1,21 +1,25 @@
-{ ... }:
-{
+{pkgs, ...}: {
   imports = [
-    ./plugins/lualine.nix
-    ./plugins/base16.nix
-    ./plugins/telescope.nix
-    ./plugins/cmp.nix
-    ./plugins/lsp.nix
-    ./plugins/treesit.nix
+    ./plugins/default.nix
   ];
 
   programs.neovim = {
     enable = true;
-
-    extraLuaConfig = # lua
+    extraPackages = with pkgs; [
+      alejandra # nix formatter
+    ];
+    extraConfig =
+      # vim
+      ''
+         " indentation
+        set tabstop=2
+        set shiftwidth=2
+        set expandtab
+      '';
+    extraLuaConfig =
+      # lua
       ''
         vim.g.mapleader = ' '
       '';
   };
-
 }

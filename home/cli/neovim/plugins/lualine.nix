@@ -1,11 +1,11 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.neovim = {
     plugins = [
       pkgs.vimPlugins.lualine-nvim
     ];
 
-    extraLuaConfig = # lua
+    extraLuaConfig =
+      # lua
       ''
         require("lualine").setup({
           extensions = { "fzf" };
@@ -51,7 +51,5 @@
           },
         })
       '';
-
   };
-
 }

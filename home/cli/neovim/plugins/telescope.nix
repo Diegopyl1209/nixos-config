@@ -1,11 +1,11 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.neovim = {
     plugins = [
       pkgs.vimPlugins.telescope-nvim
     ];
 
-    extraLuaConfig = # lua
+    extraLuaConfig =
+      # lua
       ''
         require("telescope").setup({
           defaults = {
@@ -15,6 +15,5 @@
         })
 
       '';
-
   };
 }
