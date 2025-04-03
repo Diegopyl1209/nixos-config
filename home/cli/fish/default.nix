@@ -7,6 +7,7 @@
   packageNames = map (p: p.pname or p.name or null) config.home.packages;
   hasPackage = name: lib.any (x: x == name) packageNames;
   hasEza = hasPackage "eza";
+  hasBat = hasPackage "bat";
   hasNeomutt = config.programs.neomutt.enable;
 in {
   imports = [
@@ -35,6 +36,8 @@ in {
 
       ls = mkIf hasEza "eza";
       exa = ls;
+
+      cat = mkIf hasBat "bat";
 
       mutt = mkIf hasNeomutt "neomutt";
       m = mutt;

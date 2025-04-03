@@ -15,11 +15,14 @@
         set tabstop=2
         set shiftwidth=2
         set expandtab
+
+        set clipboard=unnamedplus
       '';
     extraLuaConfig =
       # lua
       ''
         vim.g.mapleader = ' '
+        vim.wo.relativenumber = true
       '';
   };
 }

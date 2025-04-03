@@ -12,6 +12,7 @@
 
     # Cli Apps
     ghostscript
+    wl-clipboard
 
     # Development
     jetbrains.idea-ultimate
