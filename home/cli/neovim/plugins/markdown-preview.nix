@@ -1,11 +1,11 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.neovim = {
     plugins = [
       pkgs.vimPlugins.markdown-preview-nvim
     ];
 
-    extraLuaConfig = # lua
+    extraLuaConfig =
+      # lua
       ''
         --require("markdown-preview").setup({})
       '';

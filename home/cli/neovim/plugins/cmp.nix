@@ -6,6 +6,7 @@
       pkgs.vimPlugins.cmp-buffer
       pkgs.vimPlugins.cmp-path
       pkgs.vimPlugins.lspkind-nvim
+      pkgs.vimPlugins.luasnip
       #pkgs.vimPlugins.cmp-vimtex
       #pkgs.vimPlugins.cmp_luasnip
     ];
@@ -50,7 +51,7 @@
           sources = {
             { name = "path" },
             { name = "nvim_lsp" },
-            --{ name = "luasnip" },
+            { name = "luasnip" },
             { name = "buffer", option = { get_bufnrs = vim.api.nvim_list_bufs } },
             --{ name = "neorg" },
             --{ name = "vimtex" },
