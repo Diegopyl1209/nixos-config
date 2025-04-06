@@ -24,7 +24,7 @@
 
   fileSystems = {
     "/run/media/sdd1" = {
-      device = "/dev/disk/by-uuid/9084fb93-9cee-4f6e-a672-7fe74e461680";
+      device = "/dev/disk/by-uuid/e534fca6-3411-4f8c-a45f-4cf02dcb4284";
       fsType = "ext4";
     };
     "/run/media/hdd1" = {
