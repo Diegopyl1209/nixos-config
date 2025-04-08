@@ -35,6 +35,7 @@
           epkgs.sudo-edit
           epkgs.pdf-tools
           epkgs.meow
+          epkgs.vterm
 
           # LaTeX
           epkgs.auctex
@@ -45,6 +46,7 @@
           epkgs.treesit-grammars.with-all-grammars
           epkgs.lsp-mode
           epkgs.nix-ts-mode
+          epkgs.rustic
         ];
       }
     );

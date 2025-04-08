@@ -16,6 +16,9 @@
   (load-theme 'doom-gruvbox t)
   (doom-modeline-mode t)
   (setq doom-modeline-persp-name t)
+
+  (custom-set-faces
+  '(default ((t (:background "#202020")))))
 #+end_src
 ** Font
 #+begin_src elisp

@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     # Gui Apps
     inputs.zen-browser.packages."${pkgs.system}".default
@@ -18,6 +19,9 @@
     jetbrains.idea-ultimate
     android-studio
     gcc
+    rust-analyzer
+    rustc
+    cargo
 
     # Gaming
     prismlauncher
