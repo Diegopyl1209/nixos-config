@@ -36,6 +36,7 @@
           epkgs.pdf-tools
           epkgs.meow
           epkgs.vterm
+          epkgs.yasnippet
 
           # LaTeX
           epkgs.auctex

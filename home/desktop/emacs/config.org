@@ -209,7 +209,7 @@
    '("s" . meow-kill)
    '("t" . meow-till)
    '("u" . meow-undo)
-   '("U" . meow-undo-in-selection)
+   '("U" . undo-tree-redo)
    '("v" . meow-visit)
    '("w" . meow-mark-word)
    '("W" . meow-mark-symbol)
@@ -359,6 +359,10 @@
                             company-echo-metadata-frontend))
   ;(define-key company-active-map (kbd "C-n") 'company-select-next)
   ;(define-key company-active-map (kbd "C-p") 'company-select-previous)
+#+end_src
+* Yasnippet
+#+begin_src elisp
+  (yas-minor-mode t)
 #+end_src
 
 * Flycheck
