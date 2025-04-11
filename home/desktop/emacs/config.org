@@ -362,7 +362,7 @@
 #+end_src
 * Yasnippet
 #+begin_src elisp
-  (yas-minor-mode t)
+  (yas-global-mode 1)
 #+end_src
 
 * Flycheck
