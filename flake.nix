@@ -47,6 +47,10 @@
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
     };
+    doom-emacs = {
+      url = "github:hlissner/doom-emacs";
+      flake = false;
+    };
   };
 
   outputs = {
