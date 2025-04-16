@@ -7,7 +7,7 @@
     ./direnv.nix
     ./gh.nix
     ./fzf.nix
-    ./helix.nix
+    #./helix.nix
     ./neovim
   ];
   home.packages = with pkgs; [
