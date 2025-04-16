@@ -12,8 +12,21 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs;
+    package = (pkgs.emacs.pkgs.withPackages (epkgs: with epkgs; [
+      treesit-grammars.with-all-grammars
+      vterm
+    ]));
   };
+
+  home.packages = with pkgs; [
+    binutils
+    (ripgrep.override { withPCRE2 = true; })
+    gnutls
+    fd
+    imagemagick
+    zstd
+    emacs-all-the-icons-fonts
+  ];
 
   home = {
     sessionVariables = {
@@ -33,4 +46,6 @@
     source = ./doom;
     recursive = true;
   };
+
+
 }

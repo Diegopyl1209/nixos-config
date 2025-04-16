@@ -77,9 +77,12 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Projectile
+(after! projectile
+  (setq projectile-switch-project-action #'projectile-dired)
+  )
 
-;;;; dashboard
-;; A dashboard on startup can clean my mind
+;; Dashboard
 (use-package dashboard
   :bind (:map dashboard-mode-map
               ("j" . 'dashboard-next-line)
@@ -113,3 +116,12 @@
                      (registers      . 5)))
   :custom-face
  (dashboard-heading ((t (:foreground nil :weight bold)))));
+
+
+;; Lsp
+(use-package nix-ts-mode
+ :mode "\\.nix\\'")
+;;(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-ts-mode))
+(add-hook 'nix-ts-mode-hook #'lsp! 'append)
+
+(use-package vterm)
