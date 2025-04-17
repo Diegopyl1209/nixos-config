@@ -22,6 +22,8 @@
     rust-analyzer
     rustc
     cargo
+    clippy
+    rustfmt
 
     # Gaming
     prismlauncher

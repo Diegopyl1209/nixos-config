@@ -50,4 +50,3 @@
 
 (package! nix-ts-mode)
 (package! dashboard)
-(package! rustic)
