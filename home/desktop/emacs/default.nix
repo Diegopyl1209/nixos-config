@@ -28,7 +28,14 @@
 	  epkgs.marginalia
 	  epkgs.yasnippet
 	  epkgs.general
-
+	  epkgs.solaire-mode
+	  epkgs.diredfl
+	  epkgs.company
+	  epkgs.elcord
+	  epkgs.elfeed
+	  epkgs.elfeed-protocol
+	  epkgs.elfeed-goodies
+	  
           #lang
           epkgs.treesit-grammars.with-all-grammars
           epkgs.lsp-mode

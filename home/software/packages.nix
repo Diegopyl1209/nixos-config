@@ -19,11 +19,16 @@
     jetbrains.idea-ultimate
     android-studio
     gcc
+    bear
+    cmake
+    gnumake
     rust-analyzer
     rustc
     cargo
     clippy
     rustfmt
+    man-pages
+    mbedtls
 
     # Gaming
     prismlauncher
@@ -31,6 +36,7 @@
       withTetrioPlus = true;
     }))
     mangohud
+    heroic
 
     texliveMedium
   ];

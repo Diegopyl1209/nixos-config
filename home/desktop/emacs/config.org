@@ -67,7 +67,10 @@
   	      ("p" . 'dashboard-previous-line)
   	      )
     :init
-    (add-hook 'dashboard-mode-hook (lambda () (setq show-trailing-whitespace nil)))
+    (add-hook 'dashboard-mode-hook
+  	    (lambda ()
+                (setq show-trailing-whitespace nil)
+                (solaire-mode -1)))
     :custom
     (dashboard-center-content t)
     (dashboard-set-file-icons t)
@@ -91,15 +94,20 @@
                        (registers      . 5)))
     
     )
+
+  ;; set dashboard as initial buffer in emacsclient
+  (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 #+end_src 
 * Vertico
 #+begin_src elisp
   (use-package vertico
+    :defer t
     :init
     (vertico-mode +1))
 
   ;; Persist history over Emacs restarts. Vertico sorts by history position.
   (use-package savehist
+    :defer t
     :init
     (savehist-mode +1))
 
@@ -123,6 +131,7 @@
     (completion-category-overrides '((file (styles partial-completion)))))
 
   (use-package marginalia
+    :defer t
     :init
     (marginalia-mode))
 #+end_src
@@ -142,6 +151,7 @@
 * Org
 #+begin_src elisp
   (use-package org-superstar
+    :defer t
     :init
     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 #+end_src
@@ -161,9 +171,10 @@
 #+end_src
 ** Nix
 #+begin_src elisp
-    (use-package nix-ts-mode
-      :mode "\\.nix\\'"
-      :hook (nix-ts-mode . lsp-deferred))
+  (use-package nix-ts-mode
+    :defer t
+    :mode "\\.nix\\'"
+    :hook (nix-ts-mode . lsp-deferred))
 #+end_src
 ** C/C++
 #+begin_src elisp
@@ -185,4 +196,49 @@
   (use-package flycheck
     :config
     (add-hook 'after-init-hook #'global-flycheck-mode))
+#+end_src
+* Solaire-mode
+#+begin_src elisp
+  (use-package solaire-mode
+    :init (solaire-global-mode +1))
+
+  (set-face-attribute 'solaire-default-face nil :background "#202020")
+#+end_src
+* Dired
+#+begin_src elisp
+  (setf dired-kill-when-opening-new-dired-buffer t)
+  
+  (use-package diredfl
+    :hook (dired-mode . diredfl-mode)
+    :hook (dirvish-directory-view-mode . diredfl-mode))
+#+end_src
+* Company
+#+begin_src elisp
+  (use-package company
+    :hook (after-init-hook . global-company-mode))
+#+end_src
+* Elfeed
+#+begin_src elisp
+  (use-package elfeed
+    :ensure t
+    :bind (("C-x w" . elfeed))
+    :custom
+    (elfeed-db-directory (locate-user-emacs-file "elfeed")))
+
+  (use-package elfeed-protocol
+    :ensure t
+    :demand t
+    :after elfeed
+    :custom
+    (elfeed-use-curl t)
+    (elfeed-set-timeout 36000)
+    (elfeed-protocol-fever-update-unread-only t)
+    :config
+    (elfeed-protocol-enable)
+    (setq elfeed-protocol-feeds '(("fever+https://diegopyl1209@freshrss.diegopyl.me"
+      				 :api-url "https://freshrss.diegopyl.me/api/fever.php"
+      				 :password "123456789"
+      				 ))))
+  (require 'elfeed-goodies)
+  (elfeed-goodies/setup)
 #+end_src
