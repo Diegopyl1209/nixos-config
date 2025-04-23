@@ -10,7 +10,7 @@
     enable = true;
     package = (
       pkgs.emacsWithPackagesFromUsePackage {
-        package = pkgs.emacs; # pkgs.emacs-git-pgtk;
+        package = pkgs.emacs-git-pgtk;
         config = ./config.org;
         defaultInitFile = true;
         extraEmacsPackages = epkgs: [
