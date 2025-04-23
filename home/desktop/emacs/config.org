@@ -97,7 +97,10 @@
     )
 
   ;; set dashboard as initial buffer in emacsclient
-  (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
+  (setq initial-buffer-choice (lambda ()
+  				(get-buffer-create dashboard-buffer-name)
+  				(dashboard-open)
+  				))
 #+end_src 
 * Vertico
 #+begin_src elisp
