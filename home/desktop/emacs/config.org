@@ -25,13 +25,14 @@
 #+end_src
 *** Make Line numbers dont appear in certain modes
 #+begin_src elisp
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		    vterm-mode-hook
-		    shell-mode-hook
-		    doc-view-mode-hook
-		    treemacs-mode-hook))
-      (add-hook mode (lambda() (display-line-numbers-mode 0))))
+  (dolist (mode '(org-mode-hook
+  		term-mode-hook
+  		vterm-mode-hook
+  		shell-mode-hook
+  		doc-view-mode-hook
+  		tetris
+  		treemacs-mode-hook))
+    (add-hook mode (lambda() (display-line-numbers-mode 0))))
 #+end_src
 ** Keep my folders clean
 #+begin_src elisp
@@ -42,11 +43,11 @@
 
   (setq backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups" user-emacs-directory))))
 
-  ; turn off lock files
+  ;;turn off lock files
   (setq create-lockfiles nil)
 
   (setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
-  
+
 #+end_src
 ** Auto-pairing quotes and parentheses etc.
 #+begin_src elisp
