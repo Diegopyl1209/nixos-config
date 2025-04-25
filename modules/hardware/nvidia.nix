@@ -31,7 +31,7 @@
 
       # Use the open source version of the kernel module
       # Only available on driver 515.43.04+
-      open = false;
+      open = true;
 
       package = config.boot.kernelPackages.nvidiaPackages.${config.nixos.nvidia.version}; #config.boot.kernelPackages.nvidiaPackages.beta;
 
