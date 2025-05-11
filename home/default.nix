@@ -1,15 +1,15 @@
 {username, ...}: {
   home = {
-    username = username;
+    inherit username;
     homeDirectory = "/home/${username}";
-    stateVersion = "23.05";
+    stateVersion = "24.11";
   };
 
   imports = [
-    ./desktop
     ./cli
-    ./software
     ./colorschemes
+    ./programs
+    ./services
   ];
 
   programs.home-manager.enable = true;

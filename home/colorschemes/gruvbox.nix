@@ -4,12 +4,11 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf (config.home-manager.colorscheme
-    == "gruvbox") {
+  config = lib.mkIf (config.home-manager.colorschemes.colorscheme == "gruvbox") {
     scheme = {
-      slug = "biscuit-dark";
-      scheme = "Biscuit Dark";
-      author = "Biscuit";
+      slug = "gruvbox-material-dark-hard";
+      scheme = "Gruvbox Material Dark Hard";
+      author = "IDK";
       base00 = "202020";
       base01 = "2a2827";
       base02 = "504945";

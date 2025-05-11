@@ -1,8 +1,7 @@
-{...}: {
+{
   imports = [
-    ./battery.nix
-    ./backlight.nix
-    ./amdgpu.nix
+    ./bluetooth.nix
+    ./graphics.nix
     ./nvidia.nix
   ];
 }
