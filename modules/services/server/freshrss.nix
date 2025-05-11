@@ -6,7 +6,8 @@
   data_folder = "${config.nixos.services.server.dataDir}/Freshrss";
 in {
   options.nixos.services.server.freshrss.enable = lib.mkEnableOption "Enable Freshrss";
-  config = lib.mkIf config.server.freshrss.enable {
+
+  config = lib.mkIf config.nixos.services.server.freshrss.enable {
     virtualisation.oci-containers.containers.freshrss = {
       image = "freshrss/freshrss:latest";
       ports = [

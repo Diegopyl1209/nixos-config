@@ -72,4 +72,4 @@ in
       then "${host}"
       else "${username}@${host}";
     value = mkHost host;
-  }) ["desktop" "laptop" "server"])
+  }) ["desktop" /*"laptop" "server"*/])

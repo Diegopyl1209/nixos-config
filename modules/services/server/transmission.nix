@@ -5,12 +5,11 @@
     services.transmission = {
       enable = true;
       user = username;
-      group = "media";
       package = pkgs.transmission_4;
       settings = {
         download-dir = "${config.nixos.services.server.mediaDir}/download";
         incomplete-dir = "${config.nixos.services.server.mediaDir}/download/.incomplete";
-        rpc-bind-address = "100.111.84.83";
+        rpc-bind-address = "127.0.0.1";
         rpc-port = 9091;
         rcp-whitelist-enabled = 0;
         rpc-whitelist = "*.*.*.*";

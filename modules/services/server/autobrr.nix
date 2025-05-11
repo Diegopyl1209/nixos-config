@@ -9,7 +9,8 @@
   data_folder = "${config.nixos.services.server.dataDir}/autobrr";
   package = pkgs.autobrr;
 in {
-  options.server.autobrr.enable = lib.mkEnableOption "Enable Autobrr";
+  options.nixos.services.server.autobrr.enable = lib.mkEnableOption "Enable Autobrr";
+
   config = lib.mkIf config.nixos.services.server.autobrr.enable {
     systemd.tmpfiles.rules = [
       "d '${data_folder}' 0700 ${username} users - -"
