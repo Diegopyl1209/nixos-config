@@ -18,7 +18,7 @@
 
   imports = [
     inputs.base16.nixosModule
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
     ./gruvbox.nix
   ];
 
