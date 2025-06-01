@@ -21,7 +21,6 @@
         defaultInitFile = true;
         extraEmacsPackages = epkgs: [
           epkgs.use-package
-          epkgs.dashboard
           epkgs.all-the-icons
           epkgs.doom-themes
           epkgs.doom-modeline
@@ -33,24 +32,24 @@
           epkgs.orderless
           epkgs.marginalia
           epkgs.yasnippet
+          epkgs.yasnippet-snippets
           epkgs.general
           epkgs.solaire-mode
           epkgs.diredfl
           epkgs.company
           epkgs.elcord
+           
           epkgs.elfeed
           epkgs.elfeed-protocol
           epkgs.elfeed-goodies
 
           #lang
           epkgs.treesit-grammars.with-all-grammars
-          epkgs.lsp-mode
           epkgs.nix-ts-mode
-          epkgs.rustic
         ];
       };
     };
 
-    xdg.configFile."emacs/ue-colorful.png".source = ./ue-colorful.png;
+    #xdg.configFile."emacs/ue-colorful.png".source = ./ue-colorful.png;
   };
 }

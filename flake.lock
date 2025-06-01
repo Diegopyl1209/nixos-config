@@ -460,22 +460,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1747542820,
-        "narHash": "sha256-GaOZntlJ6gPPbbkTLjbd8BMWaDYafhuuYRNrxCGnPJw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "292fa7d4f6519c074f0a50394dbbe69859bb6043",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -550,7 +534,9 @@
         "git-hooks": "git-hooks",
         "gnome-shell": "gnome-shell",
         "home-manager": "home-manager_3",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "nur": "nur",
         "systems": "systems_3",
         "tinted-foot": "tinted-foot",

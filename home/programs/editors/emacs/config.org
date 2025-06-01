@@ -1,227 +1,226 @@
 #+PROPERTY: header-args :tangle config.el :results silent
-#+TITLE: Diegopyl GNU Emacs Config
+#+TITLE: Diegopyl Emacs Configuration
 
-* General Settings
+* UX / Interface
+** Startup
 #+begin_src elisp
-  (menu-bar-mode 0)
-  (tool-bar-mode 0)
-  (scroll-bar-mode 0)
+(setq inhibit-startup-screen t
+      inhibit-startup-message t
+      inhibit-startup-echo-area-message t
+      initial-scratch-message nil
+      initial-buffer-choice nil)
 #+end_src
-** Theme and Modeline
-#+begin_src elisp
-  (load-theme 'doom-gruvbox t)
-  (doom-modeline-mode t)
-  (setq doom-modeline-persp-name t)
-#+end_src
-** Enable Column numbers
-#+begin_src elisp
-  (column-number-mode t)
-#+end_src
-** Display Line Numbers
-#+begin_src elisp
-  (setq display-line-numbers-type 'relative)
-  (global-display-line-numbers-mode t)
-  (global-visual-line-mode t)
-#+end_src
-*** Make Line numbers dont appear in certain modes
-#+begin_src elisp
-  (dolist (mode '(org-mode-hook
-  		term-mode-hook
-  		vterm-mode-hook
-  		shell-mode-hook
-  		doc-view-mode-hook
-  		tetris
-  		treemacs-mode-hook))
-    (add-hook mode (lambda() (display-line-numbers-mode 0))))
-#+end_src
-** Keep my folders clean
-#+begin_src elisp
-  (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
 
-  (setq auto-save-file-name-transforms
-        '((".*" "~/.emacs.d/autosave/" t)))
+** UI Elements
+#+begin_src elisp
+(setq use-file-dialog nil
+      use-dialog-box nil
+      pop-up-windows nil
+      indicate-empty-lines nil
+      cursor-in-non-selected-windows nil)
 
-  (setq backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups" user-emacs-directory))))
-
-  ;;turn off lock files
-  (setq create-lockfiles nil)
-
-  (setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
-
+(if (fboundp 'scroll-bar-mode) (set-scroll-bar-mode nil))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(menu-bar-mode -1)
 #+end_src
-** Auto-pairing quotes and parentheses etc.
-#+begin_src elisp
-  (electric-pair-mode t)
-#+end_src
-** Performance
-#+begin_src elisp
-  (setq gc-cons-threshold 134217728  ; 128mb
-        gc-cons-percentage 1.0
-        load-prefer-newer noninteractive
-        )
-#+end_src
-* Dashboard
-#+begin_src elisp
-  (use-package dashboard
-    :bind (:map dashboard-mode-map
-  	      ("n" . 'dashboard-next-line)
-  	      ("p" . 'dashboard-previous-line)
-  	      )
-    :init
-    (add-hook 'dashboard-mode-hook
-  	    (lambda ()
-                (setq show-trailing-whitespace nil)
-                (solaire-mode -1)))
-    :custom
-    (dashboard-center-content t)
-    (dashboard-set-file-icons t)
-    (dashboard-set-navigator t)
-    (dashboard-set-heading-icons t)
-    (dashboard-image-banner-max-height 250)
-    (dashboard-banner-logo-title "[Σ Υ Ν Θ Ε Σ Η Μ Η Δ Ε Ν ϟ Ε Δ Ι Τ Ο Ρ]")
-    (dashboard-startup-banner "~/.config/emacs/ue-colorful.png")
-    :config
-    (dashboard-setup-startup-hook)
-    (setq dashboard-footer-icon (nerd-icons-codicon "nf-cod-calendar"
-                                                    :height 1.1
-                                                    :v-adjust -0.05
-                                                    :face 'font-lock-keyword-face))
-    (setq
-    dashboard-projects-backend 'projectile
-     dashboard-items '((recents        . 5)
-                       (projects       . 2)
-                       ;(bookmarks      . 5)
-                       ;(agenda         . 3)
-                       (registers      . 5)))
-    
-    )
 
-  ;; set dashboard as initial buffer in emacsclient
-  (setq initial-buffer-choice (lambda ()
-  				(get-buffer-create dashboard-buffer-name)
-  				(dashboard-open)
-  				))
-#+end_src 
-* Vertico
+** Cursor & Mode Defaults
 #+begin_src elisp
-  (use-package vertico
-    :defer t
-    :init
-    (vertico-mode +1))
+(setq initial-major-mode 'text-mode
+      default-major-mode 'text-mode)
+#+end_src
 
-  ;; Persist history over Emacs restarts. Vertico sorts by history position.
+** Font & Encoding
+#+begin_src elisp
+(setq font-lock-maximum-decoration nil
+      font-lock-maximum-size nil
+      fill-column 80
+      confirm-nonexistent-file-or-buffer nil
+      completion-styles '(basic substring))
+
+(prefer-coding-system       'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-language-environment   'utf-8)
+#+end_src
+
+** Terminal Mouse Support
+#+begin_src elisp
+(unless (display-graphic-p)
+  (xterm-mouse-mode 1)
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
+#+end_src
+
+* Editing
+** Indentation, Tabs & Spaces
+#+begin_src elisp
+(setq-default indent-tabs-mode nil
+              tab-width 4)
+#+end_src
+
+** Text Formatting
+#+begin_src elisp
+(setq auto-fill-mode nil)
+#+end_src
+
+** Line & Column Numbers
+#+begin_src elisp
+(column-number-mode t)
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode t)
+(global-visual-line-mode t)
+#+end_src
+
+*** Disable Line Numbers for Some Modes
+#+begin_src elisp
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                vterm-mode-hook
+                shell-mode-hook
+                doc-view-mode-hook
+                tetris
+                treemacs-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
+** Electric Pairing
+#+begin_src elisp
+(electric-pair-mode t)
+#+end_src
+
+* File Management
+** Autosave & Backups
+#+begin_src elisp
+(setq auto-save-list-file-prefix "~/.emacs.d/autosave/"
+      auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t))
+      backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups" user-emacs-directory)))
+      create-lockfiles nil)
+#+end_src
+
+** User Directory Cache
+#+begin_src elisp
+(setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
+#+end_src
+
+** Unique Buffer Names
+#+begin_src elisp
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse
+      uniquify-separator " • "
+      uniquify-after-kill-buffer-p t
+      uniquify-ignore-buffers-re "^\\*")
+#+end_src
+
+* Performance Tweaks
+#+begin_src elisp
+(setq gc-cons-threshold 134217728
+      gc-cons-percentage 1.0
+      load-prefer-newer noninteractive)
+#+end_src
+
+* Appearance
+** Theme & Modeline
+#+begin_src elisp
+(load-theme 'doom-gruvbox t)
+(doom-modeline-mode t)
+(setq doom-modeline-persp-name t)
+#+end_src
+
+** solaire-mode
+#+begin_src elisp
+(use-package solaire-mode
+  :init (solaire-global-mode +1))
+(set-face-attribute 'solaire-default-face nil :background "#202020")
+#+end_src
+
+* Completion & Navigation
+** Savehist
+#+begin_src elisp
   (use-package savehist
-    :defer t
-    :init
-    (savehist-mode +1))
+    :init (savehist-mode +1))
+#+end_src
+** Vertico Stack
+#+begin_src elisp
+(use-package vertico
+  :init (vertico-mode +1))
 
-  ;; Emacs minibuffer configurations.
-  (use-package emacs
-    :custom
-    ;; Support opening new minibuffers from inside existing minibuffers.
-    (enable-recursive-minibuffers t)
-    ;; Hide commands in M-x which do not work in the current mode.  Vertico
-    ;; commands are hidden in normal buffers. This setting is useful beyond
-    ;; Vertico.
-    (read-extended-command-predicate #'command-completion-default-include-p)
-    ;; Do not allow the cursor in the minibuffer prompt
-    (minibuffer-prompt-properties
-     '(read-only t cursor-intangible t face minibuffer-prompt)))
+(use-package emacs
+  :custom
+  (enable-recursive-minibuffers t)
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt)))
 
-  (use-package orderless
-    :custom
-    (completion-styles '(orderless basic))
-    (completion-category-defaults nil)
-    (completion-category-overrides '((file (styles partial-completion)))))
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
 
-  (use-package marginalia
-    :defer t
-    :init
-    (marginalia-mode))
+(use-package marginalia
+  :init (marginalia-mode))
 #+end_src
 
-* Projectile
+** Projectile
 #+begin_src elisp
 (use-package projectile
-  :init
-  (projectile-mode +1)
+  :init (projectile-mode +1)
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map))
   :custom
-  (setq projectile-project-search-path '("~/Projectos/"))
-  (setq projectile-switch-project-action #'projectile-dired)
-)
-#+end_src elisp
-* Org
-#+begin_src elisp
-  (use-package org-superstar
-    :defer t
-    :init
-    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+  (projectile-project-search-path '("~/Projectos/"))
+  (projectile-switch-project-action #'projectile-dired))
 #+end_src
-* General Keybindings
+
+** Company
 #+begin_src elisp
-  (general-define-key 
-   "<escape>" 'keyboard-escape-quit
-   ;"M-o" 'ace-window
-  )
-   
+(use-package company
+  :hook (after-init-hook . global-company-mode))
 #+end_src
-* LSP
-#+begin_src elisp
-  (setq lsp-headerline-breadcrumb-enable nil)
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  (use-package lsp-mode)
-#+end_src
+
+* Langs
 ** Nix
 #+begin_src elisp
   (use-package nix-ts-mode
     :defer t
-    :mode "\\.nix\\'"
-    :hook (nix-ts-mode . lsp-deferred))
+    :mode "\\.nix\\'")
 #+end_src
-** C/C++
-#+begin_src elisp
-  (add-hook 'c-mode-hook #'lsp-deferred)
-  (add-hook 'c++-mode-hook #'lsp-deferred)
-#+end_src
-** Rust
-#+begin_src elisp
-  (use-package rustic)
-#+end_src
-* Yasnippet
-#+begin_src elisp
-  (use-package yasnippet
-    :init
-    (yas-global-mode +1))
-#+end_src
-* Flycheck
-#+begin_src elisp
-  (use-package flycheck
-    :config
-    (add-hook 'after-init-hook #'global-flycheck-mode))
-#+end_src
-* Solaire-mode
-#+begin_src elisp
-  (use-package solaire-mode
-    :init (solaire-global-mode +1))
 
-  (set-face-attribute 'solaire-default-face nil :background "#202020")
-#+end_src
-* Dired
+* Org Mode
 #+begin_src elisp
-  (setf dired-kill-when-opening-new-dired-buffer t)
-  
-  (use-package diredfl
-    :hook (dired-mode . diredfl-mode)
-    :hook (dirvish-directory-view-mode . diredfl-mode))
+(use-package org-superstar
+  :init (add-hook 'org-mode-hook #'org-superstar-mode))
 #+end_src
-* Company
+
+* Keybindings
 #+begin_src elisp
-  (use-package company
-    :hook (after-init-hook . global-company-mode))
+(general-define-key 
+ "<escape>" 'keyboard-escape-quit)
 #+end_src
-* Elfeed
+
+* Packages
+** Yasnippet
+#+begin_src elisp
+(use-package yasnippet
+  :init (yas-global-mode +1))
+#+end_src
+
+** Flycheck
+#+begin_src elisp
+(use-package flycheck
+  :config (add-hook 'after-init-hook #'global-flycheck-mode))
+#+end_src
+
+** Dired Enhancements
+#+begin_src elisp
+(setf dired-kill-when-opening-new-dired-buffer t)
+(use-package diredfl
+  :hook (dired-mode . diredfl-mode)
+  :hook (dirvish-directory-view-mode . diredfl-mode))
+#+end_src
+
+** Elfeed
 #+begin_src elisp
   (use-package elfeed
     :ensure t
@@ -240,9 +239,10 @@
     :config
     (elfeed-protocol-enable)
     (setq elfeed-protocol-feeds '(("fever+https://diegopyl1209@freshrss.diegopyl.me"
-      				 :api-url "https://freshrss.diegopyl.me/api/fever.php"
-      				 :password "123456789"
-      				 ))))
-  (require 'elfeed-goodies)
-  (elfeed-goodies/setup)
+                                   :api-url "https://freshrss.diegopyl.me/api/fever.php"
+                                   :password "123456789"))))
+  (use-package elfeed-goodies
+    :ensure t
+    :init (elfeed-goodies/setup))
 #+end_src
+
