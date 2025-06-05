@@ -1,4 +1,10 @@
-{pkgs, lib, config, username, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  ...
+}: {
   options.nixos.services.server.transmission.enable = lib.mkEnableOption "Enable Transmission";
 
   config = lib.mkIf config.nixos.services.server.transmission.enable {

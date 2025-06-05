@@ -46,21 +46,23 @@
       size = 16;
     };
 
+    home.packages = [
+      pkgs.dejavu_fonts
+      pkgs.nerd-fonts.jetbrains-mono
+      pkgs.noto-fonts-emoji
+    ];
+
     stylix.fonts = {
       serif = {
-        package = pkgs.dejavu_fonts;
         name = "DejaVu Serif";
       };
       sansSerif = {
-        package = pkgs.dejavu_fonts;
         name = "DejaVu Sans Condensed";
       };
       monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font Mono";
       };
       emoji = {
-        package = pkgs.noto-fonts-emoji;
         name = "Noto Color Emoji";
       };
     };

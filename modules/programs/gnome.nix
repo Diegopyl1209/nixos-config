@@ -7,11 +7,9 @@
   config = lib.mkIf config.hm.home-manager.programs.gnome.enable {
     # option created in home-manager module
     services = {
+      desktopManager.gnome.enable = true;
       xserver = {
         enable = true;
-        desktopManager.gnome = {
-          enable = true;
-        };
       };
     };
 

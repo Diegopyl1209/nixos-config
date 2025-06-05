@@ -8,7 +8,7 @@
   downloads_folder = "${config.nixos.services.server.mediaDir}/download";
 in {
   options.nixos.services.server.shoko.enable = lib.mkEnableOption "Enable Shoko server";
-  
+
   config = lib.mkIf config.nixos.services.server.shoko.enable {
     virtualisation.oci-containers.containers.shoko = {
       image = "ghcr.io/shokoanime/server:latest";

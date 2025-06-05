@@ -38,7 +38,7 @@
           epkgs.diredfl
           epkgs.company
           epkgs.elcord
-           
+
           epkgs.elfeed
           epkgs.elfeed-protocol
           epkgs.elfeed-goodies

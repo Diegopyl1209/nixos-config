@@ -8,16 +8,14 @@
   options.nixos.network.enable = lib.mkEnableOption "Enable networkmanager";
 
   config = lib.mkIf config.nixos.network.enable {
-
     networking = {
       hostName = host;
       networkmanager = {
         enable = true;
         dns = "systemd-resolved";
         wifi.powersave = true;
-      }; 
+      };
     };
-    
 
     services = {
       # DNS resolver

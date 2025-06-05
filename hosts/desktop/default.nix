@@ -25,23 +25,23 @@
       pipewire.enable = true;
       tailscale.enable = true;
       server = {
-	dataDir = "/run/media/hdd1/Server/Data";
-	mediaDir = "/run/media/hdd1/Server/Media";
+        dataDir = "/run/media/hdd1/Server/Data";
+        mediaDir = "/run/media/hdd1/Server/Media";
         acme.enable = true;
-	caddy.enable = true;
-	shoko.enable = true;
-	jellyfin.enable = true;
-	autobrr.enable = true;
-	freshrss.enable = true;
-	transmission.enable = true;
+        caddy.enable = true;
+        shoko.enable = true;
+        jellyfin.enable = true;
+        autobrr.enable = true;
+        freshrss.enable = true;
+        transmission.enable = true;
       };
     };
   };
 
   fileSystems = {
     "/run/media/sdd1" = {
-     device = "/dev/disk/by-uuid/f21baeb8-c8e3-4193-b0a1-42d426b52136";
-     fsType = "ext4";
+      device = "/dev/disk/by-uuid/f21baeb8-c8e3-4193-b0a1-42d426b52136";
+      fsType = "ext4";
     };
     "/run/media/hdd1" = {
       device = "/dev/disk/by-uuid/db269432-9ba6-4c6f-945c-1c24606b224d";
@@ -52,5 +52,8 @@
       fsType = "btrfs";
     };
   };
-  
+
+  virtualisation.docker = {
+    enable = true;
+  };
 }

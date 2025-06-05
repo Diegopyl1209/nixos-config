@@ -9,6 +9,10 @@
   config = lib.mkIf config.home-manager.programs.legcord.enable {
     home.packages = with pkgs; [
       legcord
+      (discord.override {
+        withOpenASAR = true;
+        withVencord = true;
+      })
     ];
     xdg.configFile."legcord/themes/base16-nix-theme.css" = {
       text = with config.lib.stylix.colors; ''
