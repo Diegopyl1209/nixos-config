@@ -57,8 +57,6 @@
       inherit system;
     };
   in {
-    nixosConfigurations = import ./hosts (commonInherits // {isNixOS = true;});
-
-    homeConfigurations = import ./hosts (commonInherits // {isNixOS = false;});
+    nixosConfigurations = import ./hosts commonInherits;
   };
 }

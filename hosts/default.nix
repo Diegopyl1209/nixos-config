@@ -1,7 +1,6 @@
 {
   self,
   inputs,
-  isNixOS,
   lib,
   system,
   username,
@@ -15,8 +14,21 @@
       config.allowUnfree = true;
     };
     extraSpecialArgs = {
-      inherit self inputs host isNixOS username userfullname useremail pkgsStable;
+      inherit self inputs host username userfullname useremail pkgsStable;
     };
+
+    homeManagerImports = [
+      ./${host}/home.nix # host specific home-manager configuration
+      ../home
+    ];
+
+    nixosModulesImports =
+      [
+        ./${host} # host specific configuration
+        ./${host}/hardware-configuration.nix # host specific hardware configuration
+        ../modules
+      ]
+      ++ homeManagerModule;
 
     homeManagerModule = [
       inputs.home-manager.nixosModules.home-manager
@@ -34,42 +46,13 @@
       # alias for home-manager
       (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" username])
     ];
-
-    nixosModulesImports =
-      [
-        ./${host} # host specific configuration
-        ./${host}/hardware-configuration.nix # host specific hardware configuration
-        ../modules
-        #../pkgs
-        #../options/nixos
-      ]
-      ++ homeManagerModule;
-
-    homeManagerImports = [
-      ./${host}/home.nix # host specific home-manager configuration
-      ../home
-      #../options/home
-      #inputs.stylix.homeManagerModules.stylix # TODO: move all inputs modules to their respective modules
-      #inputs.nixvim.homeManagerModules.nixvim
-      #inputs.base16.nixosModule
-    ];
   in
-    if isNixOS
-    then
-      lib.nixosSystem {
-        specialArgs = extraSpecialArgs;
-        modules = nixosModulesImports;
-      }
-    else
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit extraSpecialArgs;
-        modules = homeManagerImports;
-      };
+    lib.nixosSystem {
+      specialArgs = extraSpecialArgs;
+      modules = nixosModulesImports;
+    };
 in
   builtins.listToAttrs (map (host: {
-    name =
-      if isNixOS
-      then "${host}"
-      else "${username}@${host}";
-    value = mkHost host;
-  }) ["desktop" /*"laptop" "server"*/])
+      name = "${host}";
+      value = mkHost host;
+    }) ["desktop" /*"laptop"*/ /*"server"*/])
