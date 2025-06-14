@@ -22,6 +22,7 @@ _: {
         mangohud.enable = true;
       };
       zen-browser.enable = true;
+      github-desktop.enable = true;
       legcord.enable = true;
       gnome.enable = true;
       xdg.enable = true;
