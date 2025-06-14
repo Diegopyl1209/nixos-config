@@ -8,5 +8,6 @@
     ./zen-browser.nix
     ./xdg.nix
     ./gnome
+    ./github-desktop.nix
   ];
 }

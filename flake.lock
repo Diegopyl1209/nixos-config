@@ -130,6 +130,22 @@
         "type": "github"
       }
     },
+    "doom-emacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1748878455,
+        "narHash": "sha256-CYf3CDfPZ32qwyatieklNmDstNOSQJylw8V6Qgbvzwc=",
+        "owner": "hlissner",
+        "repo": "doom-emacs",
+        "rev": "313e8fb48be6381aac7b42c6c742d6d363cc7d35",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hlissner",
+        "repo": "doom-emacs",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "inputs": {
         "nixpkgs": "nixpkgs",
@@ -490,6 +506,7 @@
       "inputs": {
         "agenix": "agenix",
         "base16": "base16",
+        "doom-emacs": "doom-emacs",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager_2",
         "nix-index-db": "nix-index-db",

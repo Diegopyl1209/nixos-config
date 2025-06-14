@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   config,
@@ -15,41 +16,38 @@
 
     programs.emacs = {
       enable = true;
-      package = pkgs.emacsWithPackagesFromUsePackage {
-        package = pkgs.emacs-git-pgtk;
-        config = ./config.org;
-        defaultInitFile = true;
-        extraEmacsPackages = epkgs: [
-          epkgs.use-package
-          epkgs.all-the-icons
-          epkgs.doom-themes
-          epkgs.doom-modeline
-          epkgs.vterm
-          epkgs.org-superstar
-          epkgs.projectile
-          epkgs.flycheck
-          epkgs.vertico
-          epkgs.orderless
-          epkgs.marginalia
-          epkgs.yasnippet
-          epkgs.yasnippet-snippets
-          epkgs.general
-          epkgs.solaire-mode
-          epkgs.diredfl
-          epkgs.company
-          epkgs.elcord
-
-          epkgs.elfeed
-          epkgs.elfeed-protocol
-          epkgs.elfeed-goodies
-
-          #lang
-          epkgs.treesit-grammars.with-all-grammars
-          epkgs.nix-ts-mode
-        ];
-      };
+      package = pkgs.emacs-git-pgtk.pkgs.withPackages (epkgs:
+        with epkgs; [
+          treesit-grammars.with-all-grammars
+          vterm
+        ]);
     };
 
-    #xdg.configFile."emacs/ue-colorful.png".source = ./ue-colorful.png;
+    home.packages = with pkgs; [
+      fd
+      pandoc
+      (ripgrep.override {withPCRE2 = true;})
+      emacs-all-the-icons-fonts
+      fontconfig
+    ];
+
+    home = {
+      sessionVariables = {
+        DOOMDIR = "${config.xdg.configHome}/doom";
+        EMACSDIR = "${config.home.homeDirectory}/.emacs.d";
+        DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
+        DOOMPROFILELOADFILE = "${config.xdg.stateHome}/doom-profiles-load.el";
+      };
+
+      # Note! This must correspond to $EMACSDIR
+      sessionPath = ["${config.home.homeDirectory}/.emacs.d/bin"];
+    };
+
+    home.file."${config.home.homeDirectory}/.emacs.d".source = inputs.doom-emacs;
+
+    xdg.configFile."doom" = {
+      source = ./doom;
+      recursive = true;
+    };
   };
 }

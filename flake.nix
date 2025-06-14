@@ -37,6 +37,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    doom-emacs = {
+      url = "github:hlissner/doom-emacs";
+      flake = false;
+    };
   };
 
   outputs = {
