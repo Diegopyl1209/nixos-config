@@ -7,7 +7,7 @@
 }: let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in {
-  imports = [inputs.spicetify-nix.homeManagerModules.default];
+  imports = [inputs.spicetify-nix.homeManagerModules.spicetify];
 
   options.home-manager.programs.media.spotify.enable = lib.mkEnableOption "Enable Spotify";
 

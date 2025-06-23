@@ -14,7 +14,7 @@ _: {
       media = {
         enable = true;
         mpv.enable = true;
-        spotify.enable = false;
+        spotify.enable = true;
       };
       games = {
         enable = true;
