@@ -53,6 +53,12 @@
     };
 in
   builtins.listToAttrs (map (host: {
-    name ="${host}";
-    value = mkHost host;
-  }) ["desktop" "laptop" /*"server"*/])
+      name = "${host}";
+      value = mkHost host;
+    }) [
+      "desktop"
+      "laptop"
+      /*
+      "server"
+      */
+    ])

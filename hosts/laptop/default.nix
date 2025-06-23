@@ -24,5 +24,5 @@
       pipewire.enable = true;
       tailscale.enable = true;
     };
-  };  
+  };
 }

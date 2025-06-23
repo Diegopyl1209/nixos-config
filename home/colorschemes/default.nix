@@ -19,6 +19,7 @@
   imports = [
     inputs.base16.nixosModule
     inputs.stylix.homeModules.stylix
+    inputs.niri.homeModules.stylix
     ./gruvbox.nix
   ];
 
@@ -37,6 +38,7 @@
         gnome.enable = true;
         yazi.enable = true;
         zed.enable = true;
+        niri.enable = true;
       };
     };
 
