@@ -7,6 +7,7 @@
     ./autobrr.nix
     ./transmission.nix
     ./freshrss.nix
+    ./vaultwarden.nix
   ];
 
   options.nixos.services.server = {

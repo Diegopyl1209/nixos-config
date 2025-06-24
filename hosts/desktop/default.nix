@@ -34,6 +34,7 @@
         autobrr.enable = true;
         freshrss.enable = true;
         transmission.enable = true;
+        vaultwarden.enable = true;
       };
     };
   };
