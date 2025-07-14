@@ -6,7 +6,7 @@
   data_dir = "${config.nixos.services.server.dataDir}/Vaultwarden";
 in {
   options.nixos.services.server.vaultwarden.enable = lib.mkEnableOption "Enable Vaultwarden";
-  
+
   config = lib.mkIf config.nixos.services.server.vaultwarden.enable {
     virtualisation.oci-containers.containers.vaultwarden = {
       image = "vaultwarden/server:latest";

@@ -16,6 +16,7 @@
       wl-clipboard-rs
       swww
       xwayland-satellite
+      mako
     ];
 
     programs.niri = {
@@ -24,6 +25,8 @@
       settings = {
         spawn-at-startup = [
           #{command = "hyprlock";}
+          {command = ["waybar"];}
+          {command = ["mako"];}
           {command = ["xwayland-satellite"];}
           {command = ["swww-daemon"];}
           {command = ["wl-paste" "--watch" "cliphist" "store"];}
@@ -63,7 +66,7 @@
             accel-profile = "adaptive";
           };
           focus-follows-mouse.enable = true;
-          warp-mouse-to-focus = true;
+          warp-mouse-to-focus.enable = true;
           workspace-auto-back-and-forth = true;
         };
         screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
@@ -117,6 +120,10 @@
           };
         };
         prefer-no-csd = true;
+
+        debug = {
+          wait-for-frame-completion-in-pipewire = []; # empty array means enabled
+        };
 
         binds = with config.lib.niri.actions; let
           set-volume = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";

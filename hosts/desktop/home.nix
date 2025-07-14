@@ -26,6 +26,8 @@ _: {
       legcord.enable = true;
       gnome.enable = true;
       niri.enable = true;
+      waybar.enable = true;
+      anyrun.enable = true;
       xdg.enable = true;
     };
     services = {
