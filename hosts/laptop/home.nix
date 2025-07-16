@@ -22,7 +22,7 @@ _: {
         mangohud.enable = false;
       };
       zen-browser.enable = true;
-      legcord.enable = true;
+      discord.enable = true;
       gnome.enable = true;
       xdg.enable = true;
     };
