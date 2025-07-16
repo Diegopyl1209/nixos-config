@@ -23,11 +23,9 @@ _: {
       };
       zen-browser.enable = true;
       github-desktop.enable = true;
-      legcord.enable = true;
+      discord.enable = true;
       gnome.enable = true;
       niri.enable = true;
-      waybar.enable = true;
-      anyrun.enable = true;
       xdg.enable = true;
     };
     services = {

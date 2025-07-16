@@ -4,17 +4,16 @@
   pkgs,
   ...
 }: {
-  options.home-manager.programs.legcord.enable = lib.mkEnableOption "Enable Legcord";
+  options.home-manager.programs.discord.enable = lib.mkEnableOption "Enable Discord";
 
-  config = lib.mkIf config.home-manager.programs.legcord.enable {
+  config = lib.mkIf config.home-manager.programs.discord.enable {
     home.packages = with pkgs; [
-      legcord
       (discord.override {
         withOpenASAR = true;
         withVencord = true;
       })
     ];
-    xdg.configFile."legcord/themes/base16-nix-theme.css" = {
+    xdg.configFile."vencord/themes/base16-nix-theme.css" = {
       text = with config.lib.stylix.colors; ''
 
         .theme-dark {

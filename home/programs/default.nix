@@ -4,13 +4,11 @@
     ./games
     ./media
     ./alacritty.nix
-    ./legcord.nix
+    ./discord.nix
     ./zen-browser.nix
     ./xdg.nix
     ./gnome
     ./niri
-    ./waybar
-    ./anyrun
     ./github-desktop.nix
   ];
 }

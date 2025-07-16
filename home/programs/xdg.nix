@@ -21,6 +21,7 @@
   audio = xdgAssociations "audio" audioPlayer ["mp3" "flac" "wav" "aac"];
   browserTypes =
     (xdgAssociations "application" browser [
+      "pdf"
       "json"
       "x-extension-htm"
       "x-extension-html"
@@ -40,14 +41,10 @@
 
   # XDG MIME types
   associations = builtins.mapAttrs (_: v: (map (e: "${e}.desktop") v)) ({
-      "application/pdf" = ["org.pwmt.zathura-pdf-mupdf"];
       "text/html" = browser;
       "text/plain" = ["Helix"];
-      "inode/directory" = ["org.gnome.nautilus" "yazi"];
+      "inode/directory" = ["org.gnome.nautilus"];
       "x-scheme-handler/magnet" = ["transmission-gtk"];
-      # Full entry is org.telegram.desktop.desktop
-      "x-scheme-handler/tg" = ["org.telegram"];
-      "x-scheme-handler/tonsite" = ["org.telegram"];
     }
     // image
     // video
