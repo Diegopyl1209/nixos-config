@@ -14,10 +14,9 @@
         # make Xbox Series X controller work
         General = {
           Experimental = true;
-          FastConnectable = true;
+          #FastConnectable = true;
           powerOnBoot = false;
           JustWorksRepairing = "always";
-          Privacy = "device";
         };
       };
     };
