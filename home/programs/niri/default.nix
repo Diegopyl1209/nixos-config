@@ -13,7 +13,7 @@
 
   config = lib.mkIf config.home-manager.programs.niri.enable {
     home.packages = with pkgs; [
-      wl-clipboard-rs
+      wl-clipboard
       swww
       xwayland-satellite
       mako

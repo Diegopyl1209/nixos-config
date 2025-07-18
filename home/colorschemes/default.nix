@@ -50,6 +50,7 @@
 
     home.packages = [
       pkgs.dejavu_fonts
+      pkgs.nerd-fonts.symbols-only
       pkgs.nerd-fonts.jetbrains-mono
       pkgs.noto-fonts-emoji
     ];
