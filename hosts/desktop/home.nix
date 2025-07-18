@@ -26,6 +26,8 @@ _: {
       discord.enable = true;
       gnome.enable = true;
       niri.enable = true;
+      anyrun.enable = true;
+      waybar.enable = true;
       xdg.enable = true;
     };
     services = {

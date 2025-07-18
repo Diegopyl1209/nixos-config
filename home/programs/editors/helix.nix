@@ -10,7 +10,7 @@
     home.packages = [
       pkgs.wl-clipboard
     ];
-  
+
     home.sessionVariables.EDITOR = "hx";
     home.sessionVariables.COLORTERM = "truecolor";
 

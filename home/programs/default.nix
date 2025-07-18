@@ -9,6 +9,8 @@
     ./xdg.nix
     ./gnome
     ./niri
+    ./waybar.nix
+    ./anyrun.nix
     ./github-desktop.nix
   ];
 }
