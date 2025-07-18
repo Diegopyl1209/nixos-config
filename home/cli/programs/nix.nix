@@ -5,7 +5,7 @@
     alejandra
     deadnix
     statix
-    nixd
+    #nixd
     #self.packages.${pkgs.system}.repl
   ];
 

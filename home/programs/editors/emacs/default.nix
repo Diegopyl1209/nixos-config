@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   config,
@@ -15,19 +16,37 @@
 
     programs.emacs = {
       enable = true;
-      package = (pkgs.emacsPackagesFor pkgs.emacs-git-pgtk).emacsWithPackages (epkgs:
+      package = pkgs.emacs-git-pgtk.pkgs.withPackages (epkgs:
         with epkgs; [
-          vterm
           treesit-grammars.with-all-grammars
-
-          # elfeed
-          # elfeed-protocol
-          # elfeed-goodies
+          vterm
         ]);
     };
 
-    xdg.configFile."emacs" = {
-      source = ./config;
+    home.packages = with pkgs; [
+      fd
+      pandoc
+      (ripgrep.override {withPCRE2 = true;})
+      emacs-all-the-icons-fonts
+      fontconfig
+    ];
+
+    home = {
+      sessionVariables = {
+        DOOMDIR = "${config.xdg.configHome}/doom";
+        EMACSDIR = "${config.home.homeDirectory}/.emacs.d";
+        DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
+        DOOMPROFILELOADFILE = "${config.xdg.stateHome}/doom-profiles-load.el";
+      };
+
+      # Note! This must correspond to $EMACSDIR
+      sessionPath = ["${config.home.homeDirectory}/.emacs.d/bin"];
+    };
+
+    home.file."${config.home.homeDirectory}/.emacs.d".source = inputs.doom-emacs;
+
+    xdg.configFile."doom" = {
+      source = ./doom;
       recursive = true;
     };
   };
